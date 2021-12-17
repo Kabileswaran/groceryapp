@@ -8,7 +8,7 @@ import java.util.Scanner;
 import connection.GetConnection;
 import projectmodel.Cart;
 
-public class KsmOrderItemDao {
+public class CartDao {
 	Scanner sc = new Scanner(System.in);
 
 	public void addToCart() throws ClassNotFoundException, SQLException {

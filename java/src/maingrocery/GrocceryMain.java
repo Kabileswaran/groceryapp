@@ -19,7 +19,7 @@ public class GrocceryMain {
 		switch (n) {
 		case 1:
 			CustomerDao obj = new CustomerDao();
-			obj.login();
+			obj.login( );
 			break;
 		case 2:
 			CustomerDao obj1 = new CustomerDao();
@@ -31,7 +31,7 @@ public class GrocceryMain {
 			break;
 
 		}
-		System.out.println(" 1)view product/n 2)exit");
+		System.out.println(" 1)view product/n 2)view profile");
 		n = Integer.parseInt(sc.nextLine());
 		
 		switch (n) {
@@ -46,7 +46,32 @@ public class GrocceryMain {
 			break;
 		case 2:
 			CustomerDao obj1 = new CustomerDao();
-			//obj1.insert();
+			obj1.viewLoginUser();
+			
+			System.out.println("1)do you want change password 2) exit");
+			
+			
+			
+			
+			
+			switch (n) {
+			case 1:
+			
+				//System.out.println(" 2)add product to cart");
+				break;
+			case 2:
+		   System.exit(0);
+				
+				break;
+			default:
+				System.out.println("enter the valid option");
+				break;
+
+			}
+			
+			
+			
+			
 			break;
 		default:
 			System.out.println("enter the valid option");

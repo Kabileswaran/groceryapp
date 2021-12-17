@@ -9,6 +9,15 @@ public class Customer {
 	private String Address;
 	private long phonenumber;
 	private String emailid;
+	private int findcustomerid;
+
+	public int getFindcustomerid() {
+		return findcustomerid;
+	}
+
+	public void setFindcustomerid(int findcustomerid) {
+		this.findcustomerid = findcustomerid;
+	}
 
 	public String getUsername() {
 		return username;
@@ -102,6 +111,13 @@ public class Customer {
 		this.Address = address;
 		this.phonenumber = phonenumber;
 		this.emailid = emailid;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [username=" + username + ", Password=" + Password + ", customerid=" + customerid
+				+ ", firstName=" + firstName + ", LastName=" + LastName + ", Address=" + Address + ", phonenumber="
+				+ phonenumber + ", emailid=" + emailid + ", findcustomerid=" + findcustomerid + "]";
 	}
 	
 

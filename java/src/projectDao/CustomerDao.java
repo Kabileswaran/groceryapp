@@ -3,22 +3,27 @@ package projectDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import connection.GetConnection;
 import projectmodel.Customer;
+import projectmodel.Product;
 
 public class CustomerDao {
 	Scanner sc = new Scanner(System.in);
+
 
 	public void signup() throws ClassNotFoundException, SQLException {
 		boolean flag1 = false;
 		String username;
 		String password;
 		String firstname;
-		
+
 		String lastname;
 		String address;
 		long phone = 0;
@@ -145,8 +150,9 @@ public class CustomerDao {
 
 	public void login() throws ClassNotFoundException, SQLException {
 		boolean flag = false;
-		String username ;
-		String passname ;
+		String username;
+		String passname;
+		
 		do {
 			do {
 				System.out.println("Enter the userName");
@@ -158,7 +164,7 @@ public class CustomerDao {
 					// System.out.println("invalid");
 					flag = true;
 				}
-				}while(flag);
+			} while (flag);
 			do {
 				System.out.println("Enter the password");
 				passname = sc.nextLine();
@@ -173,21 +179,45 @@ public class CustomerDao {
 			Customer str = new Customer();
 			str.setUsername(username);
 			str.setPassword(passname);
+			//List <Customer>  productList= new ArrayList<Customer>();
 			Connection con = GetConnection.getConnections();
 			String query = "select first_name,customer_id from bus where user_name= ? and password= ? ";
 			PreparedStatement stmt = con.prepareStatement(query);
 			stmt.setString(1, str.getUsername());
 			stmt.setString(2, str.getPassword());
 			// stmt.executeUpdate();
+			
 			ResultSet rs = stmt.executeQuery();
+	
 			if (rs.next()) {
 				System.out.println("welcome " + rs.getString("first_name"));
-				int num = rs.getInt("customer_id");
+				
 				flag = false;
 			} else {
 				System.out.println("error");
 				flag = true;
 			}
 		} while (flag);
+		
+	} 
+
+	public void viewLoginUser() throws ClassNotFoundException, SQLException {
+		Connection con = GetConnection.getConnections();
+		String query = "select first_name,last_name,address,phone,email from bus where customer_id = ?";
+		PreparedStatement stmt = con.prepareStatement(query);
+		
+		Customer str = new Customer();
+		//System.out.println(str.getFindcustomerid());
+		stmt.setInt(1, 21);
+		// stmt.executeUpdate();
+		ResultSet rs = stmt.executeQuery();
+		if (rs.next()) {
+			System.out.println("FIRSTNAME "+rs.getString("first_name") + "\nLASTNAME " + rs.getString("last_name") + "\nADDRESS "
+					+ rs.getString("address") + "\nPHONE " + rs.getLong("phone") +"\nEMAIL "+ rs.getString("email"));
+		}
+		else {
+			System.out.println("error");
+		}
+
 	}
 }

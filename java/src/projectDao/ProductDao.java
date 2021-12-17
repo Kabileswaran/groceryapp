@@ -109,8 +109,8 @@ public class ProductDao {
 	public List <Product> viewAllProducts() throws ClassNotFoundException, SQLException {
 		Connection con = GetConnection.getConnections();
 		Statement stmt = con.createStatement();
-		List <Product>  productList= new ArrayList();
-		String view = "select * from busesd";
+		List <Product>  productList= new ArrayList<Product>();
+		String view = " SELECT * FROM busesd";
 		ResultSet rs = stmt.executeQuery(view);
 		while (rs.next()) {
 			//System.out.println(rs.getInt(2) + "  " + rs.getString(1)+"  "+ rs.getInt(3));
