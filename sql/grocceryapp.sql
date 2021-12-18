@@ -36,6 +36,7 @@ address VARCHAR2(250) NOT NULL,
  SELECT * FROM product;
  SELECT * FROM order_details;
  SELECT * FROM customer;
+
  
  
  
