@@ -11,7 +11,6 @@ public class Customer {
 	private String Address;
 	private long phonenumber;
 	private String emailid;
-	
 
 	public String getUsername() {
 		return username;
@@ -77,8 +76,8 @@ public class Customer {
 		this.emailid = emailid;
 	}
 
-	public Customer(String username, String password, int customerid, String firstName, String lastName,
-			String address, long phonenumber, String emailid) {
+	public Customer(String username, String password, int customerid, String firstName, String lastName, String address,
+			long phonenumber, String emailid) {
 		super();
 		this.username = username;
 		this.Password = password;
@@ -108,4 +107,3 @@ public class Customer {
 	}
 
 }
-	

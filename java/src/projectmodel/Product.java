@@ -43,9 +43,7 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "\nProductId=" + ProductId + "\nProductName=" + ProductName + "\nProductPrice="
-				+ ProductPrice;
+		return "\nProductId=" + ProductId + "\nProductName=" + ProductName + "\nProductPrice=" + ProductPrice;
 	}
-	
 
 }
