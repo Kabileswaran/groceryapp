@@ -62,7 +62,7 @@ public class CustomerDao {
 		if (rs.next()) {
 			System.out.println("welcome " + rs.getString("first_name"));
 			b = rs.getInt("customer_id");
-			System.out.println(b);
+			//System.out.println(b);
 
 		} else {
 			System.out.println("error");
