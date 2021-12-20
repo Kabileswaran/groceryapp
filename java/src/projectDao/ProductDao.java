@@ -15,71 +15,35 @@ import projectmodel.Product;
 public class ProductDao {
 	Scanner sc = new Scanner(System.in);
 
-	public void insert() throws ClassNotFoundException, SQLException {
-		char check;
-		System.out.println("Do You Want Enter Product \n Y /N");
-		check = sc.nextLine().charAt(0);
-		if (check == 'y' || check == 'Y') {
-			System.out.println("Enter the Product id");
-			int cusId = Integer.parseInt(sc.nextLine());
-			System.out.println("Enter the Product Name");
-			String pronme = sc.nextLine();
-			System.out.println("Enter the price");
-			Double price = Double.parseDouble(sc.nextLine());
-			Product str = new Product(cusId, pronme, price);
+	public void insert(Product str) throws ClassNotFoundException, SQLException {
 			Connection con = GetConnection.getConnections();
-			String query = "insert into ksm_products values(?,?,?)";
+			String query = " insert INTO busesd (products_name,standard_cost)VALUES(?,?)";
 			PreparedStatement stmt = con.prepareStatement(query);
-			stmt.setInt(1, str.getProductId());
-			stmt.setString(2, str.getProductName());
-			stmt.setDouble(3, str.getProductPrice());
+			stmt.setString(1, str.getProductName());
+			stmt.setDouble(2, str.getProductPrice());
 			stmt.executeUpdate();
 			System.out.println("Product Added");
-		}
-
 	}
 
-	public void delete() throws ClassNotFoundException, SQLException {
-		char check;
-		System.out.println("Do You Want delete Product \n Y /N");
-		check = sc.nextLine().charAt(0);
-		if (check == 'y' || check == 'Y') {
-			System.out.println("Enter the Product id");
-			int cusId = Integer.parseInt(sc.nextLine());
-
+	public void delete(Product str) throws ClassNotFoundException, SQLException {
 			Connection con = GetConnection.getConnections();
-			Product str = new Product();
-			str.setProductId(cusId);
-			String query = "delete from  ksm_products where pi=?";
+			String query = "delete from  busesd where products_id=?";
 			PreparedStatement stmt = con.prepareStatement(query);
-
 			stmt.setInt(1, str.getProductId());
 			stmt.executeUpdate();
 			System.out.println("Product deleted");
-		}
-
 	}
 
-	public void changePrice() throws ClassNotFoundException, SQLException {
-		char check;
-		System.out.println("Do You Want Change price of Product \n Y /N");
-		check = sc.nextLine().charAt(0);
-		if (check == 'y' || check == 'Y') {
-			System.out.println("Enter the Product id");
-			int cusId = Integer.parseInt(sc.nextLine());
-			System.out.println("enter the new price");
-			int price = Integer.parseInt(sc.nextLine());
+	public void changePrice(Product str) throws ClassNotFoundException, SQLException {
+
 			Connection con = GetConnection.getConnections();
-			Product str = new Product();
-			str.setProductId(cusId);
-			str.setProductPrice(price);
 			String query = "update ksm_products set price =? where pi=?";
 			PreparedStatement stmt = con.prepareStatement(query);
 			stmt.setDouble(1, str.getProductPrice());
 			stmt.setInt(2, str.getProductId());
 			stmt.executeUpdate();
 			System.out.println("Product price update");
-		}
+		
 
 	}
 

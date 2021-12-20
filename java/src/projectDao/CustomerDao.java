@@ -66,6 +66,7 @@ public class CustomerDao {
 
 		} else {
 			System.out.println("error");
+			System.exit(0);
 
 		}
 		return b;
