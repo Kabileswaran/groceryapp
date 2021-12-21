@@ -4,6 +4,16 @@ public class Cart {
 	private int orderid;
 	private int productid;
 	private int quantity;
+	private int price;
+	
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
 
 	public int getOrderid() {
 		return orderid;

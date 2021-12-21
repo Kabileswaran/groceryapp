@@ -25,11 +25,12 @@ public class OrderDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String query =" INSERT INTO buses (customer_id) VALUES (?)";
+		String query =" INSERT INTO buses (customer_id,status) VALUES (?,?)";
 	//	String query1="  SELECT order_id FROM buses where customer_id = customer_id  order by order_date desc fetch first rows only";
 		try {
 			PreparedStatement stmt=con.prepareStatement(query);
-			stmt.setInt(1, 21);
+			stmt.setInt(1, str.getCustomerid());
+			stmt.setString(2, str.getStatus());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -47,10 +48,10 @@ public class OrderDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String query1="  SELECT order_id FROM buses where customer_id = customer_id  order by order_date desc fetch first rows only";
+		String query1="  SELECT order_id FROM buses where customer_id = ?  order by order_date desc fetch first rows only";
 		try {
 			PreparedStatement stmt =con.prepareStatement(query1);
-			stmt.setInt(1, 21);
+			stmt.setInt(1, str.getCustomerid());
 			//stmt.executeUpdate();
 			ResultSet rs= stmt.executeQuery();
 			if(rs.next())

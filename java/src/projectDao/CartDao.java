@@ -11,31 +11,17 @@ import projectmodel.Cart;
 public class CartDao {
 	Scanner sc = new Scanner(System.in);
 
-	public void addToCart() throws ClassNotFoundException, SQLException {
-		int cout = 1;
-		char check;
-		do {
-			System.out.println("enter the product name want to  added to cart");
-			String pname = sc.nextLine();
-			System.out.println("enter the quantity");
-			int qp = Integer.parseInt(sc.nextLine());
-
+	public void addToCart(Cart stt) throws ClassNotFoundException, SQLException {
 			Connection con = GetConnection.getConnections();
-			String query = "insert into cart value (?,?,?)";
-			Cart str = new Cart();
-
+			String query = "insert into bsus(order_id,product_id,quantity,price) values (?,?,?,?)";
 			PreparedStatement stmt = con.prepareStatement(query);
-			stmt.setInt(1, 0);
-
-			stmt.setDouble(3, 0);
+			stmt.setInt(1, stt.getOrderid());
+			stmt.setInt(2, stt.getProductid());
+			stmt.setInt(3, stt.getQuantity());
+			stmt.setInt(4, stt.getPrice());
 			stmt.executeUpdate();
-			System.out.println("Product Added");
-
-			System.out.println("do you want another product ");
-			System.out.println("enter y to continue");
-			check = sc.nextLine().charAt(0);
-		} while (check == 'y' || check == 'Y');
-		cout++;
+			System.out.println("order place success");
+			
 
 	}
 

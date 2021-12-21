@@ -1,22 +1,29 @@
 package maingrocery;
+
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import projectDao.CartDao;
 import projectDao.CustomerDao;
 import projectDao.OrderDao;
 import projectDao.ProductDao;
+import projectmodel.Cart;
 import projectmodel.Customer;
 import projectmodel.Order;
 import projectmodel.Product;
 
 public class GrocceryMain {
-
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		int n = 0;
 		int userid = 0;
 		int orderid = 0;
+		int productprice = 0;
 		boolean flag = false;
+		List<Integer> productid = new ArrayList<Integer>();
+		List<Integer> productquantiy = new ArrayList<Integer>();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("welcome\n 1)login\n 2)register");
 		n = Integer.parseInt(sc.nextLine());
@@ -37,7 +44,7 @@ public class GrocceryMain {
 		if (userid == 21) {
 			System.out.println("welcome admin");
 			System.out.println(
-					"1)viewproduct \n2)add product\n3)delete product \n4) change price of product \n5) today sale\n6) monthly sale\n7) change password");
+					"1)viewproduct \n2)add product\n3)delete product \n4) change price of product \n5) today sale\n6) monthly sale\n7) change password\n8)changeproduct");
 			n = Integer.parseInt(sc.nextLine());
 			switch (n) {
 			case 1:
@@ -63,60 +70,29 @@ public class GrocceryMain {
 			case 7:
 				// change password
 				changePassword(userid);
+			case 8:
+				changeproduct();
 				break;
 			default:
 				System.out.println("enter the valid option");
 				break;
-				
-			}System.exit(0);
+
+			}
+			System.exit(0);
 		} else {
 			System.out.println(" 1)view product/n 2)view profile");
 			n = Integer.parseInt(sc.nextLine());
 			switch (n) {
 			case 1:
-				// show product
 				viewProduct();
-				// added to cart
-				System.out.println("1)added to cart");
+				System.out.println("1)To make order 2)exit");
+				n = Integer.parseInt(sc.nextLine());
 				switch (n) {
 				case 1:
-					do {
-						Order str = new Order();
-						str.setCustomerid(userid);
-						OrderDao order = new OrderDao();
-						order.creatingOrderId(str);
-						orderid = order.GettingOrderID(str);
-						System.out.println("enter the product id");
-						int pid = Integer.parseInt(sc.nextLine());
-						System.out.println("enter the product quantiy");
-						int quantity = Integer.parseInt(sc.nextLine());
-						System.out.println("1)do you want added another product ");
-						int pad = Integer.parseInt(sc.nextLine());
-						if (pad == 1) {
-							flag = true;
-						}
-					} while (flag);
-
-					System.out.println(
-							"1)do you want added another product \n2) do you want to place order \n3) change quantity");
-					switch (n) {
-					case 1:
-
-						break;
-					case 2:
-						break;
-					case 3:
-
-						break;
-					default:
-						System.out.println("enter the valid option");
-						break;
-					}
+					makeOrder(userid);
+					break;
 				case 2:
 					System.exit(0);
-					break;
-				default:
-					System.out.println("enter the valid option");
 					break;
 				}
 				break;
@@ -129,11 +105,9 @@ public class GrocceryMain {
 				System.out.println("1)do you want change password 2) exit");
 				n = Integer.parseInt(sc.nextLine());
 				switch (n) {
-
 				case 1:
 					// change password
 					changePassword(userid);
-
 					break;
 				case 2:
 					System.exit(0);
@@ -146,10 +120,118 @@ public class GrocceryMain {
 			default:
 				System.out.println("enter the valid option");
 				break;
-
 			}
 		}
+	}
 
+	public static void makeOrder(int userid) throws ClassNotFoundException, SQLException {
+		boolean flag = false;
+		List<Integer> productid = new ArrayList<Integer>();
+		List<Integer> productquantiy = new ArrayList<Integer>();
+		int n = 0;
+		int quantity;
+		Scanner sc = new Scanner(System.in);
+		// added to cart
+		System.out.println("1)added to cart");
+		n = Integer.parseInt(sc.nextLine());
+		switch (n) {
+		case 1:
+			Order str = new Order();
+			str.setCustomerid(userid);
+			str.setStatus("place order");
+			OrderDao order = new OrderDao();
+			order.creatingOrderId(str);
+			// getting orderid
+			int orderid = order.GettingOrderID(str);
+			char wh;
+			do {
+				System.out.println("enter the product id");
+				int pid = Integer.parseInt(sc.nextLine());
+				// List<Integer> productid = new ArrayList<Integer>();
+				// List<Integer> productquantiy = new ArrayList<Integer>();
+				// productid.add(2);
+				// check duplicate
+				System.out.println(productid.size());
+				int i = 0;
+				//for (int i = 0; i <= productid.size(); i++)
+				do
+				{ System.out.println(productid.size());
+					if (pid == productid.indexOf(i))
+					{
+						System.out.println("1)do you want to increase quantiy to previous product");
+						int valid = Integer.parseInt(sc.nextLine());
+						if (valid == 1)
+						{
+							System.out.println("enter the product quantiy");
+							 quantity = Integer.parseInt(sc.nextLine());
+							productquantiy.add(productquantiy.size() - 1);
+						} else 
+						{
+							break;
+						}
+					} else {
+						System.out.println("one added");
+						productid.add(pid);
+					}
+	
+					i++;
+				} while(i < productid.size());
+				System.out.println("enter the product quantiy");
+				 quantity = Integer.parseInt(sc.nextLine());
+				productquantiy.add(quantity);//
+				ProductDao obj = new ProductDao();
+				Product str12 = new Product();/// check
+//				str12.setProductId(productid.indexOf(i));
+//				str12.setProductPrice(productquantiy.indexOf(i));
+//				productprice = obj.gettingRate(str12);	
+
+				System.out.println("do you want added another product Y/n");
+				// int pad = Integer.parseInt(sc.nextLine());
+				wh = sc.nextLine().charAt(0);
+			} while (wh == 'y' || wh == 'Y');
+
+			// break;
+			for (int j = 0; j <= productid.size(); j++) {
+				ProductDao obj1 = new ProductDao();
+				Product str11 = new Product();
+				str11.setProductId(productid.get(j));
+				System.out.println(productid.get(j));
+				// str12.setProductPrice(productquantiy.indexOf(i));
+				int productprice = obj1.gettingRate(str11);// productprice
+				for (int k = 0; k <= productid.size(); k++) {
+					ProductDao obj12 = new ProductDao();
+					Product str123 = new Product();//
+					// str12.setProductPrice(productquantiy.indexOf(k));
+					Cart stt = new Cart();
+					stt.setOrderid(orderid);
+					stt.setProductid(productid.get(j));
+					stt.setQuantity(productquantiy.get(k));
+					stt.setPrice(productprice);
+					CartDao obj5 = new CartDao();
+					obj5.addToCart(stt);
+					System.out.println("product placed");
+					System.exit(0);
+				}
+			}
+		}
+	}
+
+	public static void changeproduct() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the Product id");
+		int cusId = Integer.parseInt(sc.nextLine());
+		System.out.println("enter the new Product");
+		String productname = sc.nextLine();
+		Product str = new Product();
+		str.setProductId(cusId);
+		str.setProductName(productname);
+		ProductDao obj = new ProductDao();
+		try {
+			obj.changeName(str);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static void changePassword(int userid) {
@@ -222,7 +304,7 @@ public class GrocceryMain {
 		str.setProductName(pronme);
 		str.setProductPrice(price);
 		ProductDao obj = new ProductDao();
-		obj.insert(str);
+		obj.addproduct(str);
 	}
 
 	public static void viewProduct() throws ClassNotFoundException, SQLException {

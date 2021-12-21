@@ -92,8 +92,4 @@ public class CustomerDao {
 		}
 
 	}
-
-	public int findCustomerID() {
-		return 0;
-	}
 }
