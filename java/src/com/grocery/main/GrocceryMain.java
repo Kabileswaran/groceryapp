@@ -41,7 +41,7 @@ public class GrocceryMain {
 		if (userid == 1) {
 			System.out.println("welcome admin");
 			System.out.println(
-					"1)viewproduct \n2)add product\n3)delete product \n4) change price of product \n5) today sale\n6) monthly sale\n7) change password\n8)changeproduct\n9)show all user");
+					"1)viewproduct \n2)add product\n3)delete product \n4) change price of product \n5) today sale\n6) week sale\n7) change password\n8)changeproduct\n9)show all user");
 			n = Integer.parseInt(sc.nextLine());
 			switch (n) {
 			case 1:
@@ -61,8 +61,12 @@ public class GrocceryMain {
 				changePrice();
 				break;
 			case 5:
+				OrderDao obj =new OrderDao();
+				obj.todaySale();
 				break;
 			case 6:
+				OrderDao obj1 =new OrderDao();
+				obj1.weekSale();
 				break;
 			case 7:
 				// change password
@@ -128,12 +132,6 @@ public class GrocceryMain {
 			}
 		}
 	}
-public static void invoiceByUser()
-{
-	System.out.println("order place by ");
-
-	
-}
 	
 	public static void makeOrder(int userid) throws ClassNotFoundException, SQLException {
 		boolean flag = false;

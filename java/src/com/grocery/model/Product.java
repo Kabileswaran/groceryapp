@@ -4,6 +4,20 @@ public class Product {
 	private int ProductId;
 	private String ProductName;
 	private Double ProductPrice;
+	private String producStatus;
+	
+
+	public String getProducStatus() {
+		return producStatus;
+	}
+
+	public void setProducStatus(String producStatus) {
+		this.producStatus = producStatus;
+	}
+
+	public void setProductPrice(Double productPrice) {
+		ProductPrice = productPrice;
+	}
 
 	public int getProductId() {
 		return ProductId;

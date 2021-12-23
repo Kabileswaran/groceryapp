@@ -28,7 +28,7 @@ public class ProductDao {
 
 	public void delete(Product str) throws ClassNotFoundException, SQLException {
 			Connection con = GetConnection.getConnections();
-			String query = "delete from  product where products_id=?";
+			String query = "update product set status='n' where products_id=?";
 			PreparedStatement stmt = con.prepareStatement(query);
 			stmt.setInt(1, str.getProductId());
 			stmt.executeUpdate();
@@ -59,7 +59,7 @@ public class ProductDao {
 		Connection con = GetConnection.getConnections();
 		Statement stmt = con.createStatement();
 		List<Product> productList = new ArrayList<Product>();
-		String view = " SELECT * FROM product";
+		String view = " SELECT products_name,products_id,standard_cost FROM product where status ='y'";
 		ResultSet rs = stmt.executeQuery(view);
 		while (rs.next()) {
 			// System.out.println(rs.getInt(2) + " " + rs.getString(1)+" "+ rs.getInt(3));

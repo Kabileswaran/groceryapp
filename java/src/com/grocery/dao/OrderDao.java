@@ -3,11 +3,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 
 import javax.naming.spi.DirStateFactory.Result;
 
 import com.grocery.connection.GetConnection;
+import com.grocery.model.Customer;
 import com.grocery.model.Order;
 
 
@@ -66,5 +68,46 @@ public class OrderDao {
 	return custmerid;
 }
 	
+	
+	
+	
+	
+	
+	public void todaySale() throws ClassNotFoundException, SQLException {
+		Connection con = GetConnection.getConnections();
+		String query = " SELECT * FROM today_product_sale";
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(query);
+		while (rs.next()) {
+			System.out.println("\nProductName " + rs.getString(1) + "\nprice "+rs.getInt(2)+"\nquantity "+rs.getInt(3)+"\nCost "+rs.getInt(4));
+		} 
+		String query1 = " select * from today_product_amount_sale";
+		Statement stmt1 = con.createStatement();
+		ResultSet rs1 = stmt1.executeQuery(query1);
+		if(rs1.next())
+		{
+			System.out.println(" total "+rs1.getInt(1));
+		}
 
+	}
+	
+	
+	public void weekSale() throws ClassNotFoundException, SQLException {
+		Connection con = GetConnection.getConnections();
+		String query = " select* from week_product_sale";
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(query);
+		while (rs.next()) {
+			System.out.println("\nProductName " + rs.getString(1) + "\nprice "+rs.getInt(2)+"\nquantity "+rs.getInt(3)+"\nCost "+rs.getInt(4));
+		} 
+		String query1 = " SELECT * FROM week_product_amount_sale";
+		Statement stmt1 = con.createStatement();
+		ResultSet rs1 = stmt1.executeQuery(query1);
+		if(rs1.next())
+		{
+			System.out.println("total"+rs1.getInt(1));
+		}
+	}
+	
+	
 }
