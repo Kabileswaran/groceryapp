@@ -105,9 +105,44 @@ public class OrderDao {
 		ResultSet rs1 = stmt1.executeQuery(query1);
 		if(rs1.next())
 		{
-			System.out.println("total"+rs1.getInt(1));
+			System.out.println("Total :"+rs1.getInt(1));
 		}
 	}
+public void orderdetails(Order order1) throws ClassNotFoundException, SQLException
+{
+	Connection con = GetConnection.getConnections();
+	String query = "SELECT order_id,status,order_date FROM order_details where customer_id=?";
+	PreparedStatement stmt =con.prepareStatement(query);
+	stmt.setInt(1, order1.getCustomerid());
+	//stmt.executeUpdate();
+	ResultSet rs= stmt.executeQuery();
+	while(rs.next())
+	{
+		 System.out.println("\norderId :"+rs.getInt(1)+"\nstatus :"+rs.getString(2)+"\norderDate :"+rs.getDate(3));
+	}
 	
+}
+public void userOrderDetails(Order order) throws ClassNotFoundException, SQLException {
+	Connection con = GetConnection.getConnections();
+	String query = "  select p.products_name,c.quantity,c.price,(c.quantity*c.price) as cost from order_details o join cart c on o.order_id =c.order_id join product p on p.products_id=c.product_id where o.order_id=?";
+	PreparedStatement stmt =con.prepareStatement(query);
+	stmt.setInt(1, order.getOrderid());
+	//stmt.executeUpdate();               
+	ResultSet rs= stmt.executeQuery();
+	while(rs.next())
+	{
+		 System.out.println("\nproductname: "+rs.getString(1)+"\nquantity :"+rs.getInt(2)+"\nprice: "+rs.getInt(3)+"\ncost :"+rs.getInt(4));
+	}
+	String query1 = "select sum(c.quantity*c.price) as cost from order_details o join cart c on o.order_id =c.order_id join product p on p.products_id=c.product_id where o.order_id=?";
+	PreparedStatement stmt1 =con.prepareStatement(query1);
+	stmt1.setInt(1,order.getOrderid());
+	//stmt.executeUpdate();
+	ResultSet rs1= stmt1.executeQuery();
+	if(rs1.next())
+	{
+		 System.out.println("\ntotal :"+rs1.getInt(1));
+	}
+}
+
 	
 }

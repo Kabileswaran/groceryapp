@@ -43,28 +43,67 @@ address VARCHAR2(250) NOT NULL,
  SELECT * FROM product;
  SELECT * FROM order_details;
  SELECT * FROM customer;
+ ----------------one day sale
+ create view today_product_sale as
  select  
- p.products_name,
- sum(c.quantity)as quantity,
- sum(p.standard_cost * quantity) as cost
+ p.products_name
+ ,c.price
+ ,sum(c.quantity) as quantity
+ ,(c.price*sum(c.quantity)) as cost
  from order_details d
  join cart c on d.order_id=c.order_id
  join product p on p.products_id=c.product_id
- group by(p.products_name,p.products_id);
- 
- 
- 
-  select  
- p.products_name,
- sum(c.quantity)as quantity,
- sum(c.price * quantity) as cost
+ group by(p.products_name,c.price,trunc(d.order_date))
+ having trunc(d.order_date)=trunc(sysdate);
+ --------------------------------------------- total one day
+ create view today_product_amount_sale as
+   select  
+ sum(c.price*sum(c.quantity)) as cost
  from order_details d
  join cart c on d.order_id=c.order_id
  join product p on p.products_id=c.product_id
- group by(p.products_name,p.products_id);
- 
- SELECT products_name,products_id,standard_cost FROM product where status ='y';
+ group by(p.products_name,c.price,trunc(d.order_date))
+ having trunc(d.order_date)=trunc(sysdate);
+ ------------------------------------------- last 7 days 
+ create view week_product_sale as
+ select  
+ p.products_name
+ ,c.price
+ ,sum(c.quantity) as quantity
+ ,(c.price*sum(c.quantity)) as cost
+ from order_details d
+ join cart c on d.order_id=c.order_id
+ join product p on p.products_id=c.product_id
+ group by(p.products_name,c.price,trunc(d.order_date))
+ having trunc(d.order_date) between trunc(sysdate-7) and trunc(sysdate ) ;
 
- 
- 
- 
+----------------------------------------------------------last 7 days amount
+create view week_product_amount_sale as
+ select  
+ sum(c.price*sum(c.quantity)) as cost
+ from order_details d
+ join cart c on d.order_id=c.order_id
+ join product p on p.products_id=c.product_id
+ group by(p.products_name,c.price,trunc(d.order_date))
+ having trunc(d.order_date) between trunc(sysdate-7) and trunc(sysdate ) ;
+ SELECT * FROM week_product_amount_sale;
+ select* from week_product_sale;
+ select * from today_product_amount_sale;
+ SELECT * FROM today_product_sale;
+ --------------------------------------customer order
+  SELECT order_id,status,order_date FROM order_details where customer_id=2;
+  
+ -------------------------------------------- order view 
+  select p.products_name,c.quantity,c.price,(c.quantity*c.price) as cost from order_details o
+  join cart c on o.order_id =c.order_id
+  join product p on p.products_id=c.product_id where o.order_id=3;
+  -------------------------------------------------------------order cost
+  select sum(c.quantity*c.price) as cost from order_details o
+  join cart c on o.order_id =c.order_id
+  join product p on p.products_id=c.product_id where o.order_id=3;
+  ---------------------------------------------------
+  select p.products_name,c.quantity,c.price,(c.quantity*c.price) as cost from order_details o join cart c on o.order_id =c.order_id join product p on p.products_id=c.product_id where o.order_id=1;
+  
+  
+  
+  

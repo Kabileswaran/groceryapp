@@ -14,8 +14,6 @@ import com.grocery.model.Customer;
 import com.grocery.model.Order;
 import com.grocery.model.Product;
 
-
-
 public class GrocceryMain {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
@@ -40,8 +38,9 @@ public class GrocceryMain {
 		}
 		if (userid == 1) {
 			System.out.println("welcome admin");
+			do {
 			System.out.println(
-					"1)viewproduct \n2)add product\n3)delete product \n4) change price of product \n5) today sale\n6) week sale\n7) change password\n8)changeproduct\n9)show all user");
+					"1)viewproduct \n2)add product\n3)delete product \n4) change price of product \n5) today sale\n6) week sale\n7) change password\n8)changeproduct\n9)show all user\n10 logout");
 			n = Integer.parseInt(sc.nextLine());
 			switch (n) {
 			case 1:
@@ -61,28 +60,30 @@ public class GrocceryMain {
 				changePrice();
 				break;
 			case 5:
-				OrderDao obj =new OrderDao();
+				// today sale
+				OrderDao obj = new OrderDao();
 				obj.todaySale();
 				break;
 			case 6:
-				OrderDao obj1 =new OrderDao();
+				// week sale
+				OrderDao obj1 = new OrderDao();
 				obj1.weekSale();
 				break;
 			case 7:
 				// change password
 				changePassword(userid);
 			case 8:
-				//show user
+				// show user
 				changeproduct();
 				break;
 			case 9:
 				CustomerDao obj5 = new CustomerDao();
 				obj5.viewallLoginUser();
 				break;
-			default:
-				System.out.println("enter the valid option");
-				break;
+				
+			
 			}
+			} while(n!=10);
 			System.exit(0);
 		} else {
 			System.out.println(" 1)view product/n 2)view profile");
@@ -115,8 +116,21 @@ public class GrocceryMain {
 					changePassword(userid);
 					break;
 				case 2:
-					CartDao onb =new CartDao();
-					onb.toShowOrder();
+					System.out.println(userid);
+					viewOrder(userid);
+					System.out.println("1) enter the orderId to view full detail \n2)exit");
+					n = Integer.parseInt(sc.nextLine());
+					switch (n) {
+					case 1:
+						viewUserOrder();
+						break;
+					case 2:
+						System.exit(0);
+						break;
+					default:
+						System.out.println("enter the valid option");
+						break;
+					}
 					break;
 				case 3:
 					System.exit(0);
@@ -132,7 +146,24 @@ public class GrocceryMain {
 			}
 		}
 	}
-	
+
+	public static void viewUserOrder() throws ClassNotFoundException, SQLException {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("enter the order id");
+		int orders =Integer.parseInt(sc.nextLine());
+		Order order = new Order();
+		order.setOrderid(orders);
+		OrderDao obj = new OrderDao();
+		obj.userOrderDetails(order);
+	}
+
+	public static void viewOrder(int userid) throws ClassNotFoundException, SQLException {
+		Order order1 = new Order();
+		order1.setCustomerid(userid);
+		OrderDao obj = new OrderDao();
+		obj.orderdetails(order1);
+	}
+
 	public static void makeOrder(int userid) throws ClassNotFoundException, SQLException {
 		boolean flag = false;
 		int productprice;
@@ -146,13 +177,7 @@ public class GrocceryMain {
 		n = Integer.parseInt(sc.nextLine());
 		switch (n) {
 		case 1:
-			Order str = new Order();
-			str.setCustomerid(userid);
-			str.setStatus("place order");
-			OrderDao order = new OrderDao();
-			order.creatingOrderId(str);
-			// getting orderid
-			int orderid = order.GettingOrderID(str);
+			
 			char wh;
 			do {
 				System.out.println("enter the product id");
@@ -161,10 +186,10 @@ public class GrocceryMain {
 				// List<Integer> productquantiy = new ArrayList<Integer>();
 				// productid.add(2);
 				// check duplicate
-				//System.out.println(productid.size());
-				//System.out.println(productid.get(0));
+				// System.out.println(productid.size());
+				// System.out.println(productid.get(0));
 				int i = 0;
-				//for (int i = 0; i <= productid.size(); i++)
+				// for (int i = 0; i <= productid.size(); i++)
 //				do
 //				{
 //					//System.out.println(productid.get(i));
@@ -191,10 +216,10 @@ public class GrocceryMain {
 //				} while(i <productid.size());
 				productid.add(pid);
 				System.out.println("enter the product quantiy");
-				 quantity = Integer.parseInt(sc.nextLine());
+				quantity = Integer.parseInt(sc.nextLine());
 				productquantiy.add(quantity);//
-				ProductDao obj = new ProductDao();
-				Product str12 = new Product();/// check
+				//ProductDao obj = new ProductDao();
+				//Product str12 = new Product();/// check
 //				str12.setProductId(productid.indexOf(i));
 //				str12.setProductPrice(productquantiy.indexOf(i));
 //				productprice = obj.gettingRate(str12);	
@@ -203,33 +228,42 @@ public class GrocceryMain {
 				// int pad = Integer.parseInt(sc.nextLine());
 				wh = sc.nextLine().charAt(0);
 			} while (wh == 'y' || wh == 'Y');
+			
+			Order str = new Order();
+			str.setCustomerid(userid);
+			str.setStatus("place order");
+			OrderDao order = new OrderDao();
+			order.creatingOrderId(str);
+			// getting orderid
+			int orderid = order.GettingOrderID(str);
 
 			// break;
 			for (int j = 0; j < productid.size(); j++) {
 				ProductDao obj1 = new ProductDao();
 				Product str11 = new Product();
 				str11.setProductId(productid.get(j));//
-			//	System.out.println(productid.get(j));
-			//	System.out.println(productid.size());///
+				// System.out.println(productid.get(j));
+				// System.out.println(productid.size());///
 				// str12.setProductPrice(productquantiy.indexOf(i));
-				 productprice = obj1.gettingRate(str11);// productprice
-			//	for (int k = 0; k < productquantiy.size(); k++) {
-				//	ProductDao obj12 = new ProductDao();
-				//	Product str123 = new Product();//
-					// str12.setProductPrice(productquantiy.indexOf(k));
-					Cart stt = new Cart();
-					stt.setOrderid(orderid);
-					stt.setProductid(productid.get(j));
-					stt.setQuantity(productquantiy.get(j));
-					stt.setPrice(productprice);
-					CartDao obj5 = new CartDao();
-					obj5.addToCart(stt);
-				//	System.out.println(productquantiy.size());
-				//	System.out.println("product placed");
-				//	System.exit(0);
-			//	}
+				productprice = obj1.gettingRate(str11);// productprice
+				// for (int k = 0; k < productquantiy.size(); k++) {
+				// ProductDao obj12 = new ProductDao();
+				// Product str123 = new Product();//
+				// str12.setProductPrice(productquantiy.indexOf(k));
+				Cart stt = new Cart();
+				stt.setOrderid(orderid);
+				stt.setProductid(productid.get(j));
+				stt.setQuantity(productquantiy.get(j));
+				stt.setPrice(productprice);
+				CartDao obj5 = new CartDao();
+				obj5.addToCart(stt);
+				// System.out.println(productquantiy.size());
+				// System.out.println("product placed");
+				// System.exit(0);
+				// }
 			}
-		}System.exit(0);
+		}
+		System.exit(0);
 	}
 
 	public static void changeproduct() {

@@ -76,10 +76,12 @@ public class CustomerDao {
 		Connection con = GetConnection.getConnections();
 		String query = "select first_name,last_name,address,phone,email from customer where customer_id = ?";
 		PreparedStatement stmt = con.prepareStatement(query);
+		
 
 		// Customer str = new Customer();
 		// System.out.println(str2.getFindcustomerid());
 		stmt.setInt(1, str2.getCustomerid());
+	
 		// stmt.executeUpdate();
 		ResultSet rs = stmt.executeQuery();
 		if (rs.next()) {
@@ -89,6 +91,7 @@ public class CustomerDao {
 		} else {
 			System.out.println("error");
 		}
+		
 
 	}
 	
