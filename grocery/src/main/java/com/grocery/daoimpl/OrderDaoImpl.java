@@ -78,7 +78,7 @@ public class OrderDaoImpl implements OrderDaoinferace {
 	
 	
 	
-	public void todaySale() throws ClassNotFoundException, SQLException {
+	public List<Feature> todaySale() throws ClassNotFoundException, SQLException {
 		Connection con = GetConnection.getConnections();
 		List<Feature> todaysale=new ArrayList<Feature>();
 		String query = " SELECT * FROM today_product_sale";
@@ -90,49 +90,90 @@ public class OrderDaoImpl implements OrderDaoinferace {
 		feature.setPrice(rs.getDouble(2));
 		feature.setQuantity(rs.getInt(3));
 		feature.setCost(rs.getDouble(4));
-			System.out.println("\nProductName " + rs.getString(1) + "\nprice "+rs.getInt(2)+"\nquantity "+rs.getInt(3)+"\nCost "+rs.getInt(4));
-		} 
+		todaysale.add(feature);
+		
+		}
+		return todaysale; 
+	}
+		public double todaySales() throws ClassNotFoundException, SQLException {
+			double total=0;
+			Connection con = GetConnection.getConnections();
 		String query1 = " select * from today_product_amount_sale";
 		Statement stmt1 = con.createStatement();
 		ResultSet rs1 = stmt1.executeQuery(query1);
 		if(rs1.next())
 		{
 			System.out.println(" total "+rs1.getInt(1));
+			 total=rs1.getDouble(1);
 		}
+		return total;
 
 	}
 	
-	
-	public void weekSale() throws ClassNotFoundException, SQLException {
-		Connection con = GetConnection.getConnections();
-		String query = " select* from week_product_sale";
-		Statement stmt = con.createStatement();
-		ResultSet rs = stmt.executeQuery(query);
-		while (rs.next()) {
-			System.out.println("\nProductName " + rs.getString(1) + "\nprice "+rs.getInt(2)+"\nquantity "+rs.getInt(3)+"\nCost "+rs.getInt(4));
-		} 
-		String query1 = " SELECT * FROM week_product_amount_sale";
-		Statement stmt1 = con.createStatement();
-		ResultSet rs1 = stmt1.executeQuery(query1);
-		if(rs1.next())
-		{
-			System.out.println("Total :"+rs1.getInt(1));
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		public List<Feature> weekSale() throws ClassNotFoundException, SQLException {
+			Connection con = GetConnection.getConnections();
+			List<Feature> todaysale=new ArrayList<Feature>();
+			String query = " select* from week_product_sale";
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+			Feature feature =new Feature();
+			feature.setProductName( rs.getString(1));
+			feature.setPrice(rs.getDouble(2));
+			feature.setQuantity(rs.getInt(3));
+			feature.setCost(rs.getDouble(4));
+			todaysale.add(feature);
+			
+			}
+			return todaysale; 
 		}
-	}
-public void orderdetails(Order order1) throws ClassNotFoundException, SQLException
+			public double weekSales() throws ClassNotFoundException, SQLException {
+				double total=0;
+				Connection con = GetConnection.getConnections();
+			String query1 = "  SELECT * FROM week_product_amount_sale";
+			Statement stmt1 = con.createStatement();
+			ResultSet rs1 = stmt1.executeQuery(query1);
+			if(rs1.next())
+			{
+				System.out.println(" total "+rs1.getInt(1));
+				 total=rs1.getDouble(1);
+			}
+			return total;
+
+		}
+		
+		
+		
+		
+	
+
+public Order orderdetails() throws ClassNotFoundException, SQLException
 {
 	Connection con = GetConnection.getConnections();
-	String query = "SELECT order_id,status,order_date FROM order_details where customer_id=?";
+	String query = "  SELECT order_id,status,order_date FROM order_details where order_date=trunc(sysdate )";
 	PreparedStatement stmt =con.prepareStatement(query);
-	stmt.setInt(1, order1.getCustomerid());
+	Order order=new Order();
 	//stmt.executeUpdate();
 	ResultSet rs= stmt.executeQuery();
 	while(rs.next())
 	{
-		 System.out.println("\norderId :"+rs.getInt(1)+"\nstatus :"+rs.getString(2)+"\norderDate :"+rs.getDate(3));
+		order.setOrderid(rs.getInt(1));
+		order.setStatus(rs.getString(2));
+		order.setOrderdate(rs.getDate(3));
+		 //System.out.println("\norderId :"+rs.getInt(1)+"\nstatus :"+rs.getString(2)+"\norderDate :"+rs.getDate(3));
 	}
-	
+	return order;
 }
+
 public void userOrderDetails(Order order) throws ClassNotFoundException, SQLException {
 	Connection con = GetConnection.getConnections();
 	String query = "  select p.products_name,c.quantity,c.price,(c.quantity*c.price) as cost from order_details o join cart c on o.order_id =c.order_id join product p on p.products_id=c.product_id where o.order_id=?";
@@ -153,6 +194,11 @@ public void userOrderDetails(Order order) throws ClassNotFoundException, SQLExce
 	{
 		 System.out.println("\ntotal :"+rs1.getInt(1));
 	}
+}
+@Override
+public Order orderdetails(Order order1) throws ClassNotFoundException, SQLException {
+	// TODO Auto-generated method stub
+	return null;
 }
 
 	

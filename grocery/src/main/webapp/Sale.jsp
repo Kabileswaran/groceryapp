@@ -49,7 +49,7 @@ body {font-family: "Lato", sans-serif;}
 
 <div class="sidebar">
   <a href="TodaySale.jsp"><i class="fa fa-fw fa-home"></i> Today Sale </a>
-  <a href="WeeKSale.jsp"><i class="fa fa-fw fa-wrench"></i> Week Sale</a>
+  <a href="WeekSale.jsp"><i class="fa fa-fw fa-wrench"></i> Week Sale</a>
 </div>
 
 <div class="main">

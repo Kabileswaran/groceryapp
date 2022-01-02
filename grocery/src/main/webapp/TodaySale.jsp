@@ -1,4 +1,7 @@
 
+<%@page import="com.grocery.model.Feature"%>
+<%@page import="java.util.List"%>
+<%@page import="com.grocery.daoimpl.OrderDaoImpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -38,34 +41,34 @@
 </head>
 <h1><a href="Logout.jsp">logout</a></h1>
 <body>
-<% %>
+<% OrderDaoImpl obj =new OrderDaoImpl();
+List<Feature> sale =obj.todaySale();
+double b =obj.todaySales();%>
 <div id="allusers">
 <table>
 <thead>
 <tr>
-<th>Customer ID</th>
-<th>First Name</th>
-<th>Last Name</th>
-<th>Address</th>
-<th>mobile</th>
-<th>UserName</th>
-<th>Email</th>
+<th>ProductName</th>
+<th>UnitPrice</th>
+<th>Quantity</th>
+<th>Cost</th>
 </tr>
 </thead>
 <tbody>
-<%for(Customer customer:userList){ %>
+<%for(Feature feature:sale){ %>
 <tr>
-<td><%=customer.getCustomerid() %></td>
-<td><%=customer.getFirstName()%></td>
-<td><%=customer.getLastName() %></td>
-<td><%=customer.getAddress() %></td>
-<td><%=customer.getPhonenumber() %></td>
-<td><%=customer.getUsername()%></td>
-<td><%=customer.getEmailid()%></td>
+<td><%=feature.getProductName() %></td>
+<td><%=feature.getPrice()%></td>
+<td><%=feature.getQuantity() %></td>
+<td><%=feature.getCost() %></td>
+
 </tr>
 <%} %>
+<h1>Total </h1>
+<h1><%out.print(b); %></h1>
 </tbody>
 </table>
+
 </div>
 </body>
 

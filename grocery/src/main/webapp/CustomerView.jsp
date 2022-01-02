@@ -24,11 +24,8 @@
 	<% out.print( customer.getFirstName()); %>
 <a href="ProfileView.jsp">profile</a>
 	<%
-	ProductDaoImpl obj = new ProductDaoImpl();
-	List<Product> productList = obj.viewAllProducts();
-	for (int i = 0; i < productList.size(); i++) {
-		out.print(productList.get(i));
-	}
+
+	
 	%>
 </body>
 </html>

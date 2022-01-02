@@ -18,14 +18,15 @@ import com.grocery.util.GetConnection;
 public class ProductDaoImpl implements Productinterface  {
 	Scanner sc = new Scanner(System.in);
 	int	b1 = 0;
-	public void addproduct(Product str) throws ClassNotFoundException, SQLException {
+	public boolean addproduct(Product products) throws ClassNotFoundException, SQLException {
 			Connection con = GetConnection.getConnections();
 			String query = " insert into product (products_name,standard_cost)values(?,?)";
 			PreparedStatement stmt = con.prepareStatement(query);
-			stmt.setString(1, str.getProductName());
-			stmt.setDouble(2, str.getProductPrice());
+			stmt.setString(1, products.getProductName());
+			stmt.setDouble(2, products.getProductPrice());
 			stmt.executeUpdate();
-			System.out.println("Product Added");
+			return true;
+			
 	}
 
 	public void delete(Product str) throws ClassNotFoundException, SQLException {
@@ -57,7 +58,7 @@ public class ProductDaoImpl implements Productinterface  {
 			System.out.println("Product name change");
 	}
 
-	public List<Product> viewAllProducts() throws ClassNotFoundException, SQLException {
+	public List<Product>ViewAllProducts() throws ClassNotFoundException, SQLException {
 		Connection con = GetConnection.getConnections();
 		Statement stmt = con.createStatement();
 		List<Product> productList = new ArrayList<Product>();
@@ -70,6 +71,19 @@ public class ProductDaoImpl implements Productinterface  {
 		}
 		return productList;
 
+	}
+	public List<Product> AdminViewAllProducts() throws ClassNotFoundException, SQLException {
+		Connection con = GetConnection.getConnections();
+		Statement stmt = con.createStatement();
+		List<Product> productList = new ArrayList<Product>();
+		String view = " SELECT products_name,products_id,standard_cost, status FROM product";
+		ResultSet rs = stmt.executeQuery(view);
+		while (rs.next()) {
+			// System.out.println(rs.getInt(2) + " " + rs.getString(1)+" "+ rs.getInt(3));
+			Product product = new Product(rs.getInt(2), rs.getString(1), rs.getDouble(3),rs.getString(4));
+			productList.add(product);
+		}
+		return productList;
 	}
 	public  int gettingRate(Product str11) throws ClassNotFoundException, SQLException
 	{

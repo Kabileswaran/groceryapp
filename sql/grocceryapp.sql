@@ -18,6 +18,7 @@ address VARCHAR2(250) NOT NULL,
  order_date DATE DEFAULT sysdate,
  FOREIGN KEY (customer_id)REFERENCES customer(customer_id));
  
+
  
  CREATE TABLE cart
  (
@@ -114,3 +115,6 @@ create view week_product_amount_sale as
   
   ------------------------------
   insert into customer (user_name ,password,first_name,last_name,address,phone, email) values('ladha','ladha','ladha','ladha','ladha',9597785471,'ladha@gmail.com');
+  -------------------------------------------------
+  today orders
+   SELECT order_id,status,order_date FROM order_details where order_date=trunc(sysdate );

@@ -34,12 +34,22 @@ public class Product {
 	public void setProductName(String productName) {
 		ProductName = productName;
 	}
+	
+
 
 	public Product(int productId, String productName, Double productPrice) {
 		super();
 		ProductId = productId;
 		ProductName = productName;
 		ProductPrice = productPrice;
+	}
+
+	public Product(int productId, String productName, Double productPrice, String producStatus) {
+		super();
+		this.ProductId = productId;
+		this.ProductName = productName;
+		this.ProductPrice = productPrice;
+		this.producStatus = producStatus;
 	}
 
 	public Double getProductPrice() {
