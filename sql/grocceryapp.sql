@@ -41,8 +41,11 @@ address VARCHAR2(250) NOT NULL,
  --------------------------------------------------------------------------------------------------------------------------------
  SELECT * FROM cart;
  SELECT * FROM product;
+select*from customer;
+select user_name,first_name,last_name,address,phone,email,customer_id from customer;
  SELECT * FROM order_details;
  SELECT * FROM customer;
+ DELETE FROM customer WHERE customer_id = 24;
  ----------------one day sale
  create view today_product_sale as
  select  
@@ -56,6 +59,9 @@ address VARCHAR2(250) NOT NULL,
  group by(p.products_name,c.price,trunc(d.order_date))
  having trunc(d.order_date)=trunc(sysdate);
  --------------------------------------------- total one day
+ select product_id,sum(quantity) as quantity from cart group by product_id order by (quantity )desc ;
+ 
+ select * from cart;
  create view today_product_amount_sale as
    select  
  sum(c.price*sum(c.quantity)) as cost
@@ -106,4 +112,5 @@ create view week_product_amount_sale as
   
   
   
-  
+  ------------------------------
+  insert into customer (user_name ,password,first_name,last_name,address,phone, email) values('ladha','ladha','ladha','ladha','ladha',9597785471,'ladha@gmail.com');

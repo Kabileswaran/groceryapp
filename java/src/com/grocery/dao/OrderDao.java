@@ -11,9 +11,10 @@ import javax.naming.spi.DirStateFactory.Result;
 import com.grocery.connection.GetConnection;
 import com.grocery.model.Customer;
 import com.grocery.model.Order;
+import com.interfaces.OrderDaoinferace;
 
 
-public class OrderDao {
+public class OrderDao implements OrderDaoinferace {
 	int custmerid=0;
 	public void creatingOrderId(Order str)
 	{

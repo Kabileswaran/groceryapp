@@ -12,7 +12,8 @@ import java.util.Scanner;
 import com.grocery.connection.GetConnection;
 import com.grocery.model.Cart;
 import com.grocery.model.Product;
-public class CartDao {
+import com.interfaces.CartInterface;
+public class CartDao implements CartInterface{
 	Scanner sc = new Scanner(System.in);
 
 	public void addToCart(Cart stt) throws ClassNotFoundException, SQLException {

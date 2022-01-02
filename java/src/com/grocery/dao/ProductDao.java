@@ -11,9 +11,10 @@ import java.util.Scanner;
 
 import com.grocery.connection.GetConnection;
 import com.grocery.model.Product;
+import com.interfaces.Productinterface;
 
 
-public class ProductDao {
+public class ProductDao implements Productinterface {
 	Scanner sc = new Scanner(System.in);
 	int	b1 = 0;
 	public void addproduct(Product str) throws ClassNotFoundException, SQLException {

@@ -12,8 +12,9 @@ import java.util.Scanner;
 
 import com.grocery.connection.GetConnection;
 import com.grocery.model.Customer;
+import com.interfaces.Customerinterface;
 
-public class CustomerDao {
+public class CustomerDao implements Customerinterface {
 	Scanner sc = new Scanner(System.in);
 	int b = 0;
 

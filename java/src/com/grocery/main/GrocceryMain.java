@@ -188,36 +188,45 @@ public class GrocceryMain {
 				// check duplicate
 				// System.out.println(productid.size());
 				// System.out.println(productid.get(0));
-				int i = 0;
-				// for (int i = 0; i <= productid.size(); i++)
-//				do
-//				{
-//					//System.out.println(productid.get(i));
-//					//System.out.println(productid.size());
-//					if (pid == productid.get(i))
-//					{
-//						System.out.println("1)do you want to increase quantiy to previous product");
-//						int valid = Integer.parseInt(sc.nextLine());
-//						if (valid == 1)
-//						{
-//							System.out.println("enter the product quantiy");
-//							 quantity = Integer.parseInt(sc.nextLine());
-//							productquantiy.add(productquantiy.size() - 1);
-//						} else 
-//						{
-//							break;
-//						}
-//					} else {
-//						System.out.println("one added");
-//						productid.add(pid);
-//					}
-//	
-//					i++;
+				//int i = 0;
+				if(!productid.isEmpty())
+				{
+				 for (int i = 0; i < productid.size(); i++)
+				 {
+					if (pid == productid.get(i))
+					{
+						System.out.println("1)do you want to increase quantiy to previous product press 1");
+						int valid = Integer.parseInt(sc.nextLine());
+						if (valid == 1)
+						{
+							System.out.println("enter the product quantiy");
+							 quantity = Integer.parseInt(sc.nextLine());
+							productquantiy.add(productquantiy.size() - 1);
+						}
+						else 
+						{
+							break;
+						}
+					} 
+					else {
+						//System.out.println("one added");
+						productid.add(pid);
+					}
+				 }
+				}
+				else {
+					//System.out.println("one added");
+					productid.add(pid);
+					System.out.println("enter the product quantiy");
+					quantity = Integer.parseInt(sc.nextLine());
+					productquantiy.add(quantity);
+				}
+//				
 //				} while(i <productid.size());
-				productid.add(pid);
-				System.out.println("enter the product quantiy");
-				quantity = Integer.parseInt(sc.nextLine());
-				productquantiy.add(quantity);//
+				//productid.add(pid);
+//				System.out.println("enter the product quantiy");
+//				quantity = Integer.parseInt(sc.nextLine());
+//				productquantiy.add(quantity);//
 				//ProductDao obj = new ProductDao();
 				//Product str12 = new Product();/// check
 //				str12.setProductId(productid.indexOf(i));
