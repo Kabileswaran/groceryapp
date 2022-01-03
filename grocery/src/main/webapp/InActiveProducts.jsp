@@ -8,11 +8,13 @@
 </head>
 <body>
 <h1><a href="Logout.jsp">logout</a></h1>
-<form action="Addproduct">
+<form action="InActiveproduct">
 <label>Enter the product name</label>
 <input type="text" name="pname" required>
-<label>Enter the Price</label>
-<input type="text" name="price" required>
+<label>Status</label>
+<input type="radio" id="status" name="status" value="Y"> Active   
+<br>  
+<input type="radio" id="status" name="status" value="N"> InActive <br/>   
 <input type="submit" value="submit">
 </form>
 

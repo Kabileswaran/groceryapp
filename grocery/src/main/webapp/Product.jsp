@@ -64,9 +64,9 @@ body {font-family: "Lato", sans-serif;}
 
 <div class="sidebar">
   <a href="AddProduct.jsp"><i class="fa fa-fw fa-home"></i> ADD PROUCTS</a>
-  <a href="Sale.jsp"><i class="fa fa-fw fa-wrench"></i> INACTIVE PRODUCTS</a>
-  <a href="Orders.jsp"><i class="fa fa-fw fa-user"></i> CHANGE PRICE OF PRODUCTS</a>
-  <a href="Product.jsp"><i class="fa fa-fw fa-envelope"></i> MODIFIY PRODUCT NAME</a>
+  <a href="InActiveProducts.jsp"><i class="fa fa-fw fa-wrench"></i> INACTIVE PRODUCTS</a>
+  <a href="ChangeProductPrice.jsp"><i class="fa fa-fw fa-user"></i> CHANGE PRICE OF PRODUCTS</a>
+  <a href="ModifiyProduct.jsp"><i class="fa fa-fw fa-envelope"></i> MODIFIY PRODUCT NAME</a>
 </div>
 
 <div class="main"></div>

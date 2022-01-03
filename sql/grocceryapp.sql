@@ -42,8 +42,9 @@ address VARCHAR2(250) NOT NULL,
  --------------------------------------------------------------------------------------------------------------------------------
  SELECT * FROM cart;
  SELECT * FROM product;
+ update product set products_name = 'onison 1kg' where products_id=21;
+ update product set status='y' where products_name='tomato 1kg';
 select*from customer;
-select user_name,first_name,last_name,address,phone,email,customer_id from customer;
  SELECT * FROM order_details;
  SELECT * FROM customer;
  DELETE FROM customer WHERE customer_id = 24;

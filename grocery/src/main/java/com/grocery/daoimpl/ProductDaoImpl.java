@@ -29,40 +29,45 @@ public class ProductDaoImpl implements Productinterface  {
 			
 	}
 
-	public void delete(Product str) throws ClassNotFoundException, SQLException {
+	public boolean delete(Product product) throws ClassNotFoundException, SQLException {
 			Connection con = GetConnection.getConnections();
-			String query = "update product set status='n' where products_id=?";
+			String query = "update product set status=? where products_name=?";
 			PreparedStatement stmt = con.prepareStatement(query);
-			stmt.setInt(1, str.getProductId());
+			stmt.setString(1, product.getProducStatus());
+			stmt.setString(2, product.getProductName());
 			stmt.executeUpdate();
-			System.out.println("Product deleted");
+			return true;
+		
 	}
-	public void changePrice(Product str) throws ClassNotFoundException, SQLException {
+	public boolean changePrice(Product products) throws ClassNotFoundException, SQLException {
 
 			Connection con = GetConnection.getConnections();
-			String query = "update product set standard_cost =? where products_id=?";
+			String query = "update product set standard_cost =? where products_name=?";
 			PreparedStatement stmt = con.prepareStatement(query);
-			stmt.setDouble(1, str.getProductPrice());
-			stmt.setInt(2, str.getProductId());
+			stmt.setDouble(1, products.getProductPrice());
+			stmt.setString(2, products.getProductName());
 			stmt.executeUpdate();
 			System.out.println("Product price update");
+			return true;
 	}
 
-	public void changeName(Product str) throws ClassNotFoundException, SQLException {
+	public boolean changeName(Product producte) throws ClassNotFoundException, SQLException  {
 			Connection con = GetConnection.getConnections();
-			String query = "update product set products_name =? where products_id=?";
+			String query = "update product set products_name = ? where products_id= ?";
 			PreparedStatement stmt = con.prepareStatement(query);
-			stmt.setString(1, str.getProductName());
-			stmt.setInt(2, str.getProductId());
+			stmt.setString(1, producte.getProductName());
+			stmt.setInt(2, producte.getProductId());
 			stmt.executeUpdate();
+			System.out.println("hi7");
 			System.out.println("Product name change");
+			return true;
 	}
 
 	public List<Product>ViewAllProducts() throws ClassNotFoundException, SQLException {
 		Connection con = GetConnection.getConnections();
 		Statement stmt = con.createStatement();
 		List<Product> productList = new ArrayList<Product>();
-		String view = " SELECT products_name,products_id,standard_cost FROM product where status ='y'";
+		String view = " SELECT products_name,products_id,standard_cost FROM product where status ='y' and status ='Y'";
 		ResultSet rs = stmt.executeQuery(view);
 		while (rs.next()) {
 			// System.out.println(rs.getInt(2) + " " + rs.getString(1)+" "+ rs.getInt(3));

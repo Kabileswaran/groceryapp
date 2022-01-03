@@ -8,10 +8,10 @@
 </head>
 <body>
 <h1><a href="Logout.jsp">logout</a></h1>
-<form action="Addproduct">
+<form action="ChangeProductPrice">
 <label>Enter the product name</label>
 <input type="text" name="pname" required>
-<label>Enter the Price</label>
+<label>Price</label>
 <input type="text" name="price" required>
 <input type="submit" value="submit">
 </form>
