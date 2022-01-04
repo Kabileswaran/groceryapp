@@ -1,7 +1,5 @@
 <%@page import="com.grocery.model.Customer"%>
-<%@page import="com.grocery.model.Product"%>
-<%@page import="java.util.List"%>
-<%@page import="com.grocery.daoimpl.ProductDaoImpl"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -67,36 +65,38 @@ body {font-family: "Lato", sans-serif;}
 <% Customer customer = (Customer) session.getAttribute("logincustomer");%>
 	
   <a href="#AddProduct.jsp"><i class="fa fa-fw fa-home"></i><% out.print( customer.getFirstName()); %> </a>
-  <a href="LoginUserProfile.jsp"><i class="fa fa-fw fa-wrench"></i> UserProfile</a>
-  <a href="CustomerOrder.jsp"><i class="fa fa-fw fa-user"></i> ViewOrder</a>
+  <a href="ChangePassword.jsp"><i class="fa fa-fw fa-user"></i> Change Password</a>
   <a href="Logout.jsp"><i class="fa fa-fw fa-envelope"></i> Logout</a>
 </div>
 
-<div class="main"></div>
-  <% ProductDaoImpl obj = new ProductDaoImpl();
-List<Product> productList =obj.ViewAllProducts();
-     session.setAttribute("productList", productList);%>
+<div class="main"></div> 
+  
+
 <div id="allusers">
 <table>
 <thead>
 <tr>
-<th>ProductName</th>
-<th>UnitPrice</th>
-<th>Quantity</th>
+<th>First Name</th>
+<th>Last Name</th>
+<th>Address</th>
+<th>EmailId</th>
+<th>User Name</th>
+<th>Phone Number</th>
 </tr>
 </thead>
 <tbody>
-<form action="PlaceOrder">
-<%for(Product product:productList){ %>
+
 <tr>
-<td><%=product.getProductName()%></td>
-<td><%=product.getProductPrice() %></td>
-<td><input type="number" name="<%=product.getProductName()%>" min="0"></td>
+<td><% out.print( customer.getFirstName()); %></td>
+<td><% out.print( customer.getLastName()); %></td>
+<td><% out.print( customer.getAddress()); %></td>
+<td><% out.print( customer.getEmailid()); %></td>
+<td><% out.print( customer.getUsername()); %></td>
+<td><% out.print( customer.getPhonenumber()); %></td>
+
 
 </tr>
-<%} %>
-<button type="submit">conform</button>
-</form>
+
 </tbody>
 </table>
 </div>

@@ -15,6 +15,13 @@ public class Product {
 		this.producStatus = producStatus;
 	}
 
+	public Product(int productId, String productName, Double productPrice) {
+		super();
+		ProductId = productId;
+		ProductName = productName;
+		ProductPrice = productPrice;
+	}
+
 	public void setProductPrice(Double productPrice) {
 		ProductPrice = productPrice;
 	}
@@ -37,9 +44,8 @@ public class Product {
 	
 
 
-	public Product(int productId, String productName, Double productPrice) {
+	public Product( String productName, Double productPrice) {
 		super();
-		ProductId = productId;
 		ProductName = productName;
 		ProductPrice = productPrice;
 	}

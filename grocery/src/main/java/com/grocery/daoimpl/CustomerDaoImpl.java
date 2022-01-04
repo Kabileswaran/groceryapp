@@ -35,16 +35,17 @@ public class CustomerDaoImpl implements Customerinterface {
 
 	}
 
-	public void changepassword(Customer str3) throws ClassNotFoundException, SQLException {
+	public boolean changepassword(Customer customer) throws ClassNotFoundException, SQLException {
 
 		Connection con = GetConnection.getConnections();
-		String query = "update  customer set password = ? where customer_id=?";
+		String query = "update  customer set password = ? where phone=?";
 		PreparedStatement stmt = con.prepareStatement(query);
 		// System.out.println(str3.getCustomerid());
-		stmt.setString(1, str3.getPassword());
-		stmt.setInt(2, str3.getCustomerid());
+		stmt.setString(1, customer.getPassword());
+		stmt.setDouble(2, customer.getPhonenumber());
 		stmt.executeUpdate();
 		System.out.println("password update successful ");
+		return true;
 	}
 
 	public  Customer  login( Customer customer) throws ClassNotFoundException, SQLException {
@@ -72,7 +73,7 @@ public class CustomerDaoImpl implements Customerinterface {
 		return customer;
 
 	}
-
+//
 	public void viewLoginUser(Customer str2) throws ClassNotFoundException, SQLException {
 		Connection con = GetConnection.getConnections();
 		String query = "select first_name,last_name,address,phone,email from customer where customer_id = ?";

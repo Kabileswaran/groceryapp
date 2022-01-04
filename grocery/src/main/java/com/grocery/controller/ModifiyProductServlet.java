@@ -24,14 +24,15 @@ public class ModifiyProductServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		int Pid= Integer.parseInt(req.getParameter("pID"));
 		String product= req.getParameter("pName");
-		Product producte = new Product();
-		producte.setProductName(product);
+		Product producte =new Product();
 		producte.setProductId(Pid);
-		ProductDaoImpl obj =new ProductDaoImpl();
+		producte.setProductName(product);
+		ProductDaoImpl p=new ProductDaoImpl();
+	
 		 PrintWriter out=resp.getWriter();  
 	
 			try {
-				boolean	flag =obj.changeName(producte);
+				boolean flag=	p.changeName(producte);
 					if(flag)
 					{
 						 out.print("Change price product"); 

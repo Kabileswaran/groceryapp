@@ -29,6 +29,13 @@ public class Order {
 		return status;
 	}
 
+	public Order(int orderid, String status, Date orderdate) {
+		super();
+		this.orderid = orderid;
+		this.status = status;
+		this.orderdate = orderdate;
+	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}

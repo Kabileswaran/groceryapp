@@ -11,7 +11,7 @@ public interface OrderDaoinferace {
 	public int GettingOrderID(Order str);
 	public List<Feature> todaySale() throws ClassNotFoundException, SQLException;
 	public List<Feature> weekSale() throws ClassNotFoundException, SQLException;
-	public Order orderdetails(Order order1) throws ClassNotFoundException, SQLException;
+	public List<Order> orderdetail(Order order) throws ClassNotFoundException, SQLException;
 	public void userOrderDetails(Order order) throws ClassNotFoundException, SQLException;
 	public double todaySales() throws ClassNotFoundException, SQLException;
 	public double weekSales() throws ClassNotFoundException, SQLException;

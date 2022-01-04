@@ -67,14 +67,29 @@ public class ProductDaoImpl implements Productinterface  {
 		Connection con = GetConnection.getConnections();
 		Statement stmt = con.createStatement();
 		List<Product> productList = new ArrayList<Product>();
-		String view = " SELECT products_name,products_id,standard_cost FROM product where status ='y' and status ='Y'";
+		String view = " SELECT products_name,standard_cost FROM product where status ='y' or status ='Y'";
 		ResultSet rs = stmt.executeQuery(view);
 		while (rs.next()) {
 			// System.out.println(rs.getInt(2) + " " + rs.getString(1)+" "+ rs.getInt(3));
-			Product product = new Product(rs.getInt(2), rs.getString(1), rs.getDouble(3));
+			Product product = new Product(rs.getString(1),rs.getDouble(2));
 			productList.add(product);
 		}
 		return productList;
+	}
+		
+		
+		public List<Product>ViewAllProducte() throws ClassNotFoundException, SQLException {
+			Connection con = GetConnection.getConnections();
+			Statement stmt = con.createStatement();
+			List<Product> productList1 = new ArrayList<Product>();
+			String view = " SELECT products_name,standard_cost,products_id FROM product where status ='y' or status ='Y'";
+			ResultSet rs = stmt.executeQuery(view);
+			while (rs.next()) {
+				// System.out.println(rs.getInt(2) + " " + rs.getString(1)+" "+ rs.getInt(3));
+				Product product = new Product( rs.getInt(3),rs.getString(1),rs.getDouble(2));
+				productList1.add(product);
+			}
+			return productList1;
 
 	}
 	public List<Product> AdminViewAllProducts() throws ClassNotFoundException, SQLException {
