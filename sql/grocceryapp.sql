@@ -46,6 +46,7 @@ address VARCHAR2(250) NOT NULL,
  update product set status='y' where products_name='tomato 1kg';
 select*from customer;
  SELECT * FROM order_details;
+  SELECT order_id,status,order_date FROM order_details where customer_id=2;
  SELECT * FROM customer;
  DELETE FROM customer WHERE customer_id = 24;
  ----------------one day sale

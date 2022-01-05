@@ -1,9 +1,7 @@
+
+<%@page import="com.grocery.model.Feature"%>
 <%@page import="com.grocery.daoimpl.OrderDaoImpl"%>
-<%@page import="com.grocery.model.Order"%>
-<%@page import="com.grocery.model.Customer"%>
-<%@page import="com.grocery.model.Product"%>
 <%@page import="java.util.List"%>
-<%@page import="com.grocery.daoimpl.ProductDaoImpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -70,35 +68,39 @@ body {font-family: "Lato", sans-serif;}
 </div>
 
 <div class="main"></div>
-<% Customer customer = (Customer) session.getAttribute("logincustomer");%>
-<% out.print( customer.getFirstName()); %>
-  <%  Order order = new Order();
-  order.setCustomerid(customer.getCustomerid());
-  OrderDaoImpl obj1 =new  OrderDaoImpl();
-  List<Order> orderlist= obj1.orderdetail(order);%>
+<% int b=Integer.parseInt(request.getParameter("orderId"));
+Feature feature= new Feature();
+feature.setOrderId(b);
+OrderDaoImpl obj =new OrderDaoImpl ();
+List<Feature> orderlist=obj.userOrderDetails(feature);
+double c=obj.userOrderDetailse(feature);
+%>
+
 <div id="allusers">
 <table>
 <thead>
 <tr>
-<th>Orderid</th>
-<th>Status</th>
-<th>Orderdate</th>
-<th>Details</th>
+<th>ProductName</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Cost</th>
 </tr>
 </thead>
 <tbody>
-<%for(Order orders:orderlist){ %>
+<%for(Feature orders:orderlist){ %>
 <tr>
-<td><%=orders.getOrderid()%></td>
-<td><%=orders.getStatus()%></td>
-<td><%=orders.getOrderdate()%></td>
-<td><a href="UserOrderFullDetails.jsp?orderId=<%=orders.getOrderid()%>">click</a><td>
+<td><%=orders.getProductName()%></td>
+<td><%=orders.getPrice()%></td>
+<td><%=orders.getQuantity()%></td>
+<td><%=orders.getCost()%></td>
+
 
 
 </tr>
 <%} %>
 </tbody>
 </table>
+<h3><%out.print(c); %></h3>
 </div>
   
 </div>

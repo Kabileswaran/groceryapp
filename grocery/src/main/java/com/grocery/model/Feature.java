@@ -6,6 +6,13 @@ private double	price;
 private int	quantity;
 private double	Cost;
 private double	total;
+private int orderId;
+public int getOrderId() {
+	return orderId;
+}
+public void setOrderId(int orderId) {
+	this.orderId = orderId;
+}
 public String getProductName() {
 	return ProductName;
 }

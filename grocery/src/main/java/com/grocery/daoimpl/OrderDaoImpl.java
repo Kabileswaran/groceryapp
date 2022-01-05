@@ -155,25 +155,41 @@ public class OrderDaoImpl implements OrderDaoinferace {
 		return order;
 	}
 
-	public void userOrderDetails(Order order) throws ClassNotFoundException, SQLException {
+	public List<Feature> userOrderDetails( Feature feature) throws ClassNotFoundException, SQLException {
 		Connection con = GetConnection.getConnections();
+		List<Feature> orderlist = new ArrayList<Feature>();
 		String query = "  select p.products_name,c.quantity,c.price,(c.quantity*c.price) as cost from order_details o join cart c on o.order_id =c.order_id join product p on p.products_id=c.product_id where o.order_id=?";
 		PreparedStatement stmt = con.prepareStatement(query);
-		stmt.setInt(1, order.getOrderid());
+		stmt.setInt(1, feature.getOrderId()) ;
 		// stmt.executeUpdate();
 		ResultSet rs = stmt.executeQuery();
 		while (rs.next()) {
+			Feature feature1 = new Feature();
+			feature1.setProductName(rs.getString(1));
+			feature1.setQuantity(rs.getInt(2));
+			feature1.setPrice(rs.getDouble(3));
+			feature1.setCost(rs.getDouble(4));
 			System.out.println("\nproductname: " + rs.getString(1) + "\nquantity :" + rs.getInt(2) + "\nprice: "
 					+ rs.getInt(3) + "\ncost :" + rs.getInt(4));
-		}
+			orderlist.add(feature1);
+		} return orderlist;
+	}
+	public double userOrderDetailse(Feature feature) throws ClassNotFoundException, SQLException {
+		double b=0;
+		Connection con = GetConnection.getConnections();
+
 		String query1 = "select sum(c.quantity*c.price) as cost from order_details o join cart c on o.order_id =c.order_id join product p on p.products_id=c.product_id where o.order_id=?";
 		PreparedStatement stmt1 = con.prepareStatement(query1);
-		stmt1.setInt(1, order.getOrderid());
+		stmt1.setInt(1, feature.getOrderId());
 		// stmt.executeUpdate();
 		ResultSet rs1 = stmt1.executeQuery();
 		if (rs1.next()) {
 			System.out.println("\ntotal :" + rs1.getInt(1));
+			
+			 b=rs1.getInt(1);
+			
 		}
+		return b;
 	}
 
 	public List<Order> orderdetail(Order order) throws ClassNotFoundException, SQLException {
@@ -181,18 +197,25 @@ public class OrderDaoImpl implements OrderDaoinferace {
 		List<Order> orderList = new ArrayList<Order>();
 		String query = "  SELECT order_id,status,order_date FROM order_details where customer_id=?";
 		PreparedStatement stmt = con.prepareStatement(query);
-		
+
 		stmt.setInt(1, order.getCustomerid());
 		// stmt.executeUpdate();
-	
+
 		ResultSet rs = stmt.executeQuery();
 		while (rs.next()) {
-			Order orders=new  Order(rs.getInt(1), rs.getString(2), rs.getDate(3)); 
+			Order orders = new Order(rs.getInt(1), rs.getString(2), rs.getDate(3));
 			orderList.add(orders);
 			System.out.println("hi1");
-			 System.out.println("\norderId :"+rs.getInt(1)+"\nstatus:"+rs.getString(2)+"\norderDate :"+rs.getDate(3));
+			System.out.println(
+					"\norderId :" + rs.getInt(1) + "\nstatus:" + rs.getString(2) + "\norderDate :" + rs.getDate(3));
 		}
 		return orderList;
+	}
+
+	@Override
+	public List<Feature> userOrderDetails(Order order) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
