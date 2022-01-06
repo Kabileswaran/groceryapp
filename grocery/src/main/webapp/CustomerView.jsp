@@ -1,3 +1,7 @@
+<%@page import="com.grocery.daoimpl.CartDaoImpl"%>
+<%@page import="com.grocery.model.Cart"%>
+<%@page import="com.grocery.daoimpl.OrderDaoImpl"%>
+<%@page import="com.grocery.model.Order"%>
 <%@page import="com.grocery.model.Customer"%>
 <%@page import="com.grocery.model.Product"%>
 <%@page import="java.util.List"%>
@@ -69,12 +73,13 @@ body {font-family: "Lato", sans-serif;}
   <a href="#AddProduct.jsp"><i class="fa fa-fw fa-home"></i><% out.print( customer.getFirstName()); %> </a>
   <a href="LoginUserProfile.jsp"><i class="fa fa-fw fa-wrench"></i> UserProfile</a>
   <a href="CustomerOrder.jsp"><i class="fa fa-fw fa-user"></i> ViewOrder</a>
+   <a href="Cart.jsp"><i class="fa fa-fw fa-user"></i> Cart</a>
   <a href="Logout.jsp"><i class="fa fa-fw fa-envelope"></i> Logout</a>
 </div>
 
 <div class="main"></div>
-  <% ProductDaoImpl obj = new ProductDaoImpl();
-List<Product> productList =obj.ViewAllProducts();
+  <% ProductDaoImpl obj5 = new ProductDaoImpl();
+List<Product> productList =obj5.ViewAllProducte();
      session.setAttribute("productList", productList);%>
 <div id="allusers">
 <table>
@@ -82,26 +87,29 @@ List<Product> productList =obj.ViewAllProducts();
 <tr>
 <th>ProductName</th>
 <th>UnitPrice</th>
-<th>Quantity</th>
+<th>Add To Cart</th>
 </tr>
 </thead>
 <tbody>
-<form action="PlaceOrder">
 <%for(Product product:productList){ %>
 <tr>
 <td><%=product.getProductName()%></td>
 <td><%=product.getProductPrice() %></td>
-<td><input type="number" name="<%=product.getProductName()%>" min="0"></td>
+<td input type='button' onclick="alert('Added To Cart')"><a href="AddToCart?orderId=<%=product.getProductId()%>">Add To Cart</a><td>
 
-</tr>
+<%-- <td><a href="AddToCart?orderId=<%=product.getProductId()%>">Add To Cart</a><td>
+ --%>
+ 
+ </tr>
+
 <%} %>
-<button type="submit">conform</button>
-</form>
 </tbody>
 </table>
+
+
 </div>
-  
 </div>
+
 </body>
 </html>
 

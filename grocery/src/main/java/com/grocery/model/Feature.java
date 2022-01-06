@@ -7,6 +7,13 @@ private int	quantity;
 private double	Cost;
 private double	total;
 private int orderId;
+private int productId;
+public int getProductId() {
+	return productId;
+}
+public void setProductId(int productId) {
+	this.productId = productId;
+}
 public int getOrderId() {
 	return orderId;
 }

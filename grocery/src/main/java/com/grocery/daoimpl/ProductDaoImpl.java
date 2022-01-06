@@ -105,12 +105,12 @@ public class ProductDaoImpl implements Productinterface  {
 		}
 		return productList;
 	}
-	public  int gettingRate(Product str11) throws ClassNotFoundException, SQLException
+	public  int gettingRate(Product product) throws ClassNotFoundException, SQLException
 	{
 			Connection con = GetConnection.getConnections();
 			String query = " select standard_cost from product where products_id=? ";
 			PreparedStatement stmt = con.prepareStatement(query);
-			stmt.setInt(1,str11.getProductId() );
+			stmt.setInt(1,product.getProductId() );
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				b1 = rs.getInt("standard_cost");

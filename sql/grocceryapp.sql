@@ -18,6 +18,7 @@ address VARCHAR2(250) NOT NULL,
  order_date DATE DEFAULT sysdate,
  FOREIGN KEY (customer_id)REFERENCES customer(customer_id));
  
+ 
 
  
  CREATE TABLE cart
@@ -40,15 +41,12 @@ address VARCHAR2(250) NOT NULL,
  standard_cost NUMBER(10) NOT NULL
  status varchar2(1) DEFAULT 'y');
  --------------------------------------------------------------------------------------------------------------------------------
- SELECT * FROM cart;
+  SELECT * FROM cart ;
  SELECT * FROM product;
- update product set products_name = 'onison 1kg' where products_id=21;
- update product set status='y' where products_name='tomato 1kg';
 select*from customer;
  SELECT * FROM order_details;
   SELECT order_id,status,order_date FROM order_details where customer_id=2;
  SELECT * FROM customer;
- DELETE FROM customer WHERE customer_id = 24;
  ----------------one day sale
  create view today_product_sale as
  select  
@@ -59,20 +57,17 @@ select*from customer;
  from order_details d
  join cart c on d.order_id=c.order_id
  join product p on p.products_id=c.product_id
- group by(p.products_name,c.price,trunc(d.order_date))
- having trunc(d.order_date)=trunc(sysdate);
+ group by(p.products_name,c.price,trunc(d.order_date),d.status)
+ having trunc(d.order_date)=trunc(sysdate) and d.status='place order'or d.status='conform';
  --------------------------------------------- total one day
- select product_id,sum(quantity) as quantity from cart group by product_id order by (quantity )desc ;
- 
- select * from cart;
  create view today_product_amount_sale as
    select  
  sum(c.price*sum(c.quantity)) as cost
  from order_details d
  join cart c on d.order_id=c.order_id
  join product p on p.products_id=c.product_id
- group by(p.products_name,c.price,trunc(d.order_date))
- having trunc(d.order_date)=trunc(sysdate);
+ group by(p.products_name,c.price,trunc(d.order_date),d.status)
+ having trunc(d.order_date)=trunc(sysdate) and d.status='place order'or d.status='conform';
  ------------------------------------------- last 7 days 
  create view week_product_sale as
  select  
@@ -83,8 +78,8 @@ select*from customer;
  from order_details d
  join cart c on d.order_id=c.order_id
  join product p on p.products_id=c.product_id
- group by(p.products_name,c.price,trunc(d.order_date))
- having trunc(d.order_date) between trunc(sysdate-7) and trunc(sysdate ) ;
+ group by(p.products_name,c.price,trunc(d.order_date),d.status)
+ having trunc(d.order_date) between trunc(sysdate-7) and trunc(sysdate ) and d.status='place order'or d.status='conform' ;
 
 ----------------------------------------------------------last 7 days amount
 create view week_product_amount_sale as
@@ -93,30 +88,44 @@ create view week_product_amount_sale as
  from order_details d
  join cart c on d.order_id=c.order_id
  join product p on p.products_id=c.product_id
- group by(p.products_name,c.price,trunc(d.order_date))
- having trunc(d.order_date) between trunc(sysdate-7) and trunc(sysdate ) ;
- SELECT * FROM week_product_amount_sale;
- select* from week_product_sale;
- select * from today_product_amount_sale;
- SELECT * FROM today_product_sale;
+ group by(p.products_name,c.price,trunc(d.order_date),d.status)
+ having trunc(d.order_date) between trunc(sysdate-7) and trunc(sysdate ) and d.status='place order'or d.status='conform' ;
+ -------------------------------
+ SELECT * FROM   week_product_amount_sale;
+ select* from  week_product_sale;
+ select * from  today_product_amount_sale;
+ SELECT * FROM  today_product_sale;
  --------------------------------------customer order
-  SELECT order_id,status,order_date FROM order_details where customer_id=2;
+  SELECT order_id,status,order_date FROM order_details where customer_id=2 and status= 'place order' or status='conform';
   
  -------------------------------------------- order view 
   select p.products_name,c.quantity,c.price,(c.quantity*c.price) as cost from order_details o
   join cart c on o.order_id =c.order_id
-  join product p on p.products_id=c.product_id where o.order_id=3;
+  join product p on p.products_id=c.product_id where o.order_id=1;
   -------------------------------------------------------------order cost
   select sum(c.quantity*c.price) as cost from order_details o
   join cart c on o.order_id =c.order_id
   join product p on p.products_id=c.product_id where o.order_id=3;
   ---------------------------------------------------
-  select p.products_name,c.quantity,c.price,(c.quantity*c.price) as cost from order_details o join cart c on o.order_id =c.order_id join product p on p.products_id=c.product_id where o.order_id=1;
-  
-  
-  
-  ------------------------------
+------------------------------
   insert into customer (user_name ,password,first_name,last_name,address,phone, email) values('ladha','ladha','ladha','ladha','ladha',9597785471,'ladha@gmail.com');
   -------------------------------------------------
   today orders
    SELECT order_id,status,order_date FROM order_details where order_date=trunc(sysdate );
+   ---------------------------------------------------------------------------------
+   --check in cart 
+    SELECT order_id FROM order_details; where customer_id=2 and status='in cart'
+    ---------------------------------------------
+    --check product already in cart
+     SELECT * FROM order_details where order_id =;
+      SELECT quantity FROM cart where order_id=43 and product_id =1;
+      -----------------------------------------------------
+      --increase quantity
+      --------------in cart details-------------------
+        select p.products_name,c.quantity,p.standard_cost,(c.quantity*p.standard_cost) as cost from order_details o
+  join cart c on o.order_id =c.order_id
+  join product p on p.products_id=c.product_id where o.order_id=46;
+  ----------------in cart cost-------------------
+   select sum(c.quantity*p.standard_cost) as cost from order_details o
+  join cart c on o.order_id =c.order_id
+  join product p on p.products_id=c.product_id where o.order_id=3;

@@ -195,7 +195,7 @@ public class OrderDaoImpl implements OrderDaoinferace {
 	public List<Order> orderdetail(Order order) throws ClassNotFoundException, SQLException {
 		Connection con = GetConnection.getConnections();
 		List<Order> orderList = new ArrayList<Order>();
-		String query = "  SELECT order_id,status,order_date FROM order_details where customer_id=?";
+		String query = "  SELECT order_id,status,order_date FROM order_details where customer_id= ? and status= 'place order' or status='conform'";
 		PreparedStatement stmt = con.prepareStatement(query);
 
 		stmt.setInt(1, order.getCustomerid());
@@ -212,10 +212,48 @@ public class OrderDaoImpl implements OrderDaoinferace {
 		return orderList;
 	}
 
+	public int cartCheck(Order order) throws ClassNotFoundException, SQLException
+	
+	{
+		int b=0;
+		Connection con = GetConnection.getConnections();
+		String query = "   SELECT order_id FROM order_details where customer_id=? and status='in cart' ";
+		PreparedStatement stmt = con.prepareStatement(query);
+
+		stmt.setInt(1, order.getCustomerid());
+		ResultSet rs = stmt.executeQuery();
+		while (rs.next()) {
+		 b=rs.getInt(1);
+		}
+		return b;
+	}
 	@Override
 	public List<Feature> userOrderDetails(Order order) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public void makefinal(Order order ) {
+		Connection con = null;
+		try {
+			con = GetConnection.getConnections();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String query = " update order_details set status ='conform' , order_date=TO_CHAR(SYSDATE, 'DD-MM-YYYY') where order_id=?";
+
+		try {
+			PreparedStatement stmt = con.prepareStatement(query);
+			stmt.setInt(1, order.getOrderid());
+
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -64,6 +64,9 @@ body {font-family: "Lato", sans-serif;}
 
 
 <div class="sidebar">
+<% Customer customer = (Customer) session.getAttribute("logincustomer");%>
+	
+  <a href="#AddProduct.jsp"><i class="fa fa-fw fa-home"></i><% out.print( customer.getFirstName()); %> </a>
   <a href="LoginUserProfile.jsp"><i class="fa fa-fw fa-wrench"></i> UserProfile</a>
   <a href="CustomerOrder.jsp"><i class="fa fa-fw fa-user"></i> ViewOrder</a>
   <a href="Logout.jsp"><i class="fa fa-fw fa-envelope"></i> Logout</a>
@@ -83,24 +86,19 @@ List<Product> productList =obj.ViewAllProducts();
 </tr>
 </thead>
 <tbody>
+<form action="PlaceOrder">
 <%for(Product product:productList){ %>
 <tr>
 <td><%=product.getProductName()%></td>
 <td><%=product.getProductPrice() %></td>
-<td><button type="button"  onclick="addToCart()" >Add to Cart</button>
-<div class="container">
-<input type="button" onclick="decrementValue()" value="-" />
-<input type="text" name="quantity" value="1" maxlength="2" max="10" size="1" id="number" />
-<input type="button" onclick="incrementValue()" value="+" />
-</div></td>
+<td><input type="number" name="<%=product.getProductName()%>" min="0"></td>
 
 </tr>
 <%} %>
-
+<button type="submit">conform</button>
+</form>
 </tbody>
 </table>
- 
- 
 </div>
   
 </div>
