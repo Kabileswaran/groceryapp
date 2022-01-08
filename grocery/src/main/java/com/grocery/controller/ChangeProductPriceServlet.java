@@ -29,6 +29,7 @@ public class ChangeProductPriceServlet extends HttpServlet {
 		products.setProductPrice(price);
 		ProductDaoImpl obj =new ProductDaoImpl();
 		 PrintWriter out=resp.getWriter();  
+		 resp.setContentType("text/html");
 		try {
 		boolean	flag =obj.changePrice(products);
 			if(flag)

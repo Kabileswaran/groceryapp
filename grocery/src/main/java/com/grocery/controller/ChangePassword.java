@@ -41,6 +41,7 @@ public class ChangePassword extends HttpServlet {
 			 customer.setPassword(Password);
 			 CustomerDaoImpl obj=new  CustomerDaoImpl();
 			 PrintWriter out=resp.getWriter();  
+			 resp.setContentType("text/html");
 			 try {
 				 
 				boolean flag= obj.changepassword(customer);
@@ -48,14 +49,14 @@ public class ChangePassword extends HttpServlet {
 				if(flag)
 				{
 					out.print("Password Change sucessfully");  
+					resp.sendRedirect("Login.jsp");
 					
-					 req.getRequestDispatcher("Login.jsp").include(req, resp);
 				
 				}
 				else {
 					 out.print("Sorry, username or password error!");  
-					
-					 req.getRequestDispatcher("Login.jsp").include(req, resp);
+					 resp.sendRedirect("Login.jsp");
+				
 					
 				}
 				

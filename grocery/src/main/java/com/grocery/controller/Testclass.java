@@ -1,74 +1,144 @@
 package com.grocery.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Scanner;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.grocery.daoimpl.CartDaoImpl;
-import com.grocery.daoimpl.CustomerDaoImpl;
 import com.grocery.daoimpl.OrderDaoImpl;
-import com.grocery.daoimpl.ProductDaoImpl;
 import com.grocery.model.Cart;
 import com.grocery.model.Customer;
 import com.grocery.model.Order;
-import com.grocery.model.Product;
 
-public class Testclass {
+/**
+ * Servlet implementation class AddToCart
+ */
+public class Testclass extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public Testclass() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Scanner c=new Scanner(System.in);
-		System.out.println("enter the productId");
-		int pid= Integer.parseInt(c.nextLine());
-		int cid=2;
-		Order order =new Order();
+		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();
+		response.setContentType("text/html");
+
+	
+
+		Customer customer = (Customer) session.getAttribute("logincustomer");
+		int pid = Integer.parseInt(request.getParameter("orderId"));
+		int cid = customer.getCustomerid();
+		Order order = new Order();
 		order.setCustomerid(cid);
-		OrderDaoImpl obj= new OrderDaoImpl();
-		int oid=  obj.cartCheck(order);
-		//check user if order id already exist in cart
-		if(!(oid>0) )
-		{
-			//creating new order id
-			//pass cusid to create order id
-			//get order id
-			System.out.println("creating new orderid");
-			Order str = new Order();  
-			  
-			
+		OrderDaoImpl obj = new OrderDaoImpl();
+		int oid = 0;
+		try {
+			oid = obj.cartCheck(order);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// check user if order id already exist in cart
+		if (!(oid > 0)) {
+			Order str = new Order();
+
 			str.setCustomerid(cid);
 			str.setStatus("in cart");
-			
+
 			obj.creatingOrderId(str);
-			// getting orderid
-			 oid = obj.GettingOrderID(str);
-	
+			oid = obj.GettingOrderID(str);
+
 		}
 		Cart stt = new Cart();
 		stt.setOrderid(oid);
 		stt.setProductid(pid);
-	
-		CartDaoImpl obj1 =new CartDaoImpl();
-		int qty=obj1.check(stt);
-		if(qty>0)
-		{
-			System.out.println("increase quantiy");
-			stt.setQuantity(qty+1);
-			obj1.incease(stt);
 
+		CartDaoImpl obj1 = new CartDaoImpl();
+		int qty = 0;
+		try {
+			qty = obj1.check(stt);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else
+		if (qty > 0&&qty!=10) {//check quantity
+
+			stt.setQuantity(qty + 1);
+			try {
+				obj1.incease(stt);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			out.print("Increase quantity");
+			request.getRequestDispatcher("CustomerView.jsp").include(request, response);
+
+
+		} 
+		else if(qty>10)
 		{
-			System.out.println("add to cart");
-			
+			out.print("reached max quantity");
+			request.getRequestDispatcher("CustomerView.jsp").include(request, response);	
+		}
+		else {
+
 			stt.setQuantity(1);
 			stt.setPrice(0);
-			obj1.addToCart(stt);
+			try {
+				obj1.addToCart(stt);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			out.print("add to cart");
+			request.getRequestDispatcher("CustomerView.jsp").include(request, response);
 			
-		}
-	
 
-}
+		}
+		
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
 
 }

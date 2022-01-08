@@ -26,6 +26,7 @@ public class InActiveProduct extends HttpServlet {
 		product.setProducStatus(productstatus);
 		ProductDaoImpl obj =new ProductDaoImpl();
 		PrintWriter out=resp.getWriter(); 
+		 resp.setContentType("text/html");
 		try {
 			
 			

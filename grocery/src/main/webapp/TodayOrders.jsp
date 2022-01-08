@@ -1,4 +1,5 @@
-<%@page import="com.grocery.model.Customer"%>
+<%@page import="com.grocery.model.Order"%>
+<%@page import="com.grocery.daoimpl.OrderDaoImpl"%>
 <%@page import="com.grocery.model.Product"%>
 <%@page import="java.util.List"%>
 <%@page import="com.grocery.daoimpl.ProductDaoImpl"%>
@@ -8,7 +9,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Add New product</title>
 </head>
 <style>
 body {font-family: "Lato", sans-serif;}
@@ -64,42 +65,35 @@ body {font-family: "Lato", sans-serif;}
 
 
 <div class="sidebar">
-<% Customer customer = (Customer) session.getAttribute("logincustomer");%>
-	
-  <a href="#AddProduct.jsp"><i class="fa fa-fw fa-home"></i><% out.print( customer.getFirstName()); %> </a>
-  <a href="LoginUserProfile.jsp"><i class="fa fa-fw fa-wrench"></i> UserProfile</a>
-  <a href="CustomerOrder.jsp"><i class="fa fa-fw fa-user"></i> ViewOrder</a>
-  <a href="Logout.jsp"><i class="fa fa-fw fa-envelope"></i> Logout</a>
+<a href="AdminView.jsp"><i class="fa fa-fw fa-home"></i> HOME</a>
+  <a href="Orders.jsp"><i class="fa fa-fw fa-home"></i> BACK</a>
+   <a href="Logout.jsp"><i class="fa fa-fw fa-wrench"></i> LOGOUT</a>
 </div>
 
 <div class="main"></div>
-  <% ProductDaoImpl obj = new ProductDaoImpl();
-List<Product> productList =obj.ViewAllProducts();
-     session.setAttribute("productList", productList);%>
+ <% OrderDaoImpl obj =new OrderDaoImpl();
+ Order order =new Order();
+List<Order> OrderList =obj.orderdetails();%>
 <div id="allusers">
 <table>
 <thead>
 <tr>
-<th>ProductName</th>
-<th>UnitPrice</th>
-<th>Quantity</th>
+<th>OrderId</th>
+<th>Status</th>
+<th>Date</th>
 </tr>
 </thead>
 <tbody>
-<form action="PlaceOrder">
-<%for(Product product:productList){ %>
+<%for(Order product:OrderList){ %>
 <tr>
-<td><%=product.getProductName()%></td>
-<td><%=product.getProductPrice() %></td>
-<td><input type="number" name="<%=product.getProductName()%>" min="0"></td>
+<td><%=product.getOrderid()%></td>
+<td><%=product.getStatus()%></td>
+<td><%=product.getOrderdate()%></td>
 
 </tr>
 <%} %>
-<button type="submit">conform</button>
-</form>
 </tbody>
 </table>
-</div>
   
 </div>
 </body>

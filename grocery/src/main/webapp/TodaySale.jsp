@@ -1,47 +1,79 @@
-
+<%@page import="java.util.Date"%>
 <%@page import="com.grocery.model.Feature"%>
-<%@page import="java.util.List"%>
 <%@page import="com.grocery.daoimpl.OrderDaoImpl"%>
+<%@page import="com.grocery.model.Product"%>
+<%@page import="java.util.List"%>
+<%@page import="com.grocery.daoimpl.ProductDaoImpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
+<meta charset="ISO-8859-1">
+<title>Today Sale</title>
+</head>
+<style>
+body {font-family: "Lato", sans-serif;}
+
+.sidebar {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: lightgreen;
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+.sidebar a {
+  padding: 20px 2px 8px 16px;
+  text-decoration: none;
+  font-size: 15px;
+  color: black;
+  display: block;
+  font-family:Arial Black;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+ #allusers table,th,tr,td{
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 10px;
         }
-     #allusers{
+             #allusers{
        position: absolute;
        top:100px;
        left:200px;
        right: 200px;
        bottom: 100px;
        }
-       
-   
-        body{
-            background-color: white;
-
-            }
-        #allusers table,th,tr,td{
-        border: 1px solid black;
-        border-collapse: collapse;
-        padding: 10px;
-        }
-    </style>
-</head>
-<h1><a href="Logout.jsp">logout</a></h1>
+        
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+</style>
 <body>
-<% OrderDaoImpl obj =new OrderDaoImpl();
+
+
+<div class="sidebar">
+<a href="AdminView.jsp"><i class="fa fa-fw fa-home"></i> Home</a>
+<a href="Sale.jsp"><i class="fa fa-fw fa-wrench"></i> Back</a>
+  <a href="Logout.jsp"><i class="fa fa-fw fa-wrench"></i> Logout</a>
+ 
+</div>
+
+<div class="main"></div>
+  <% OrderDaoImpl obj =new OrderDaoImpl();
 List<Feature> sale =obj.todaySale();
 double b =obj.todaySales();%>
 <div id="allusers">
@@ -64,12 +96,18 @@ double b =obj.todaySales();%>
 
 </tr>
 <%} %>
+<%
+         Date date = new Date();
+         out.print( "<h2 align = \"center\">" +date.toString()+"</h2>");
+      %>
 <h1>Total </h1>
 <h1><%out.print(b); %></h1>
 </tbody>
 </table>
-
+</div>
+  
 </div>
 </body>
-
 </html>
+
+

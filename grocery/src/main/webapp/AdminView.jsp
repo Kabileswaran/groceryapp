@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Admin</title>
 </head>
 <style>
 body {font-family: "Lato", sans-serif;}
@@ -48,14 +48,14 @@ body {font-family: "Lato", sans-serif;}
 
 
 <div class="sidebar">
-  <a href="AdminAllUser.jsp"><i class="fa fa-fw fa-home"></i> ALLUSER</a>
-  <a href="Sale.jsp"><i class="fa fa-fw fa-wrench"></i> SALEDETAILS</a>
+  <a href="AdminAllUser.jsp"><i class="fa fa-fw fa-home"></i> ALL USERS</a>
+  <a href="Sale.jsp"><i class="fa fa-fw fa-wrench"></i> SALE DETAILS</a>
   <a href="Orders.jsp"><i class="fa fa-fw fa-user"></i> ORDERS</a>
   <a href="Product.jsp"><i class="fa fa-fw fa-envelope"></i> PRODUCTS</a>
 </div>
 
 <div class="main">
-  <h1>HI ADMIN</h1>
+  <h1>WELCOME ADMIN</h1>
 </div>
 </body>
 </html>

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Product</title>
 </head>
 <style>
 body {font-family: "Lato", sans-serif;}
@@ -63,10 +63,12 @@ body {font-family: "Lato", sans-serif;}
 
 
 <div class="sidebar">
+<a href="AdminView.jsp"><i class="fa fa-fw fa-home"></i> HOME</a>
   <a href="AddProduct.jsp"><i class="fa fa-fw fa-home"></i> ADD PROUCTS</a>
-  <a href="InActiveProducts.jsp"><i class="fa fa-fw fa-wrench"></i> INACTIVE PRODUCTS</a>
-  <a href="ChangeProductPrice.jsp"><i class="fa fa-fw fa-user"></i> CHANGE PRICE OF PRODUCTS</a>
+  <a href="InActiveProducts.jsp"><i class="fa fa-fw fa-wrench"></i> STATUS PRODUCTS</a>
+  <a href="ChangeProductPrice.jsp"><i class="fa fa-fw fa-user"></i> CHANGE PRODUCTS PRICE</a>
   <a href="ModifiyProduct.jsp"><i class="fa fa-fw fa-envelope"></i> MODIFIY PRODUCT NAME</a>
+   <a href="Logout.jsp"><i class="fa fa-fw fa-wrench"></i> LOGOUT</a>
 </div>
 
 <div class="main"></div>
@@ -76,10 +78,10 @@ List<Product> productList =obj.AdminViewAllProducts();%>
 <table>
 <thead>
 <tr>
-<th>ProductID</th>
-<th>ProductName</th>
-<th>UnitPrice</th>
-<th> status</th>
+<th>Product ID</th>
+<th>Product Name</th>
+<th>Unit Price</th>
+<th> Status</th>
 </tr>
 </thead>
 <tbody>

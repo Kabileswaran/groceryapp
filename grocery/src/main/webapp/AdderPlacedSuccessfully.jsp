@@ -4,10 +4,15 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Logout</title>
+<title>Conform</title>
 </head>
 <body>
-<h1>Logout successfully</h1>
-<a href="Login.jsp">Login</a>
+<script>
+         setTimeout(function(){
+            window.location.href = 'CustomerView.jsp';
+         }, 3000);
+      </script>
+      <h1>THANK FOR PURCHASE</h1>
+
 </body>
 </html>

@@ -42,6 +42,7 @@ public class AddProductServlet extends HttpServlet {
 		products.setProductPrice(price);
 		ProductDaoImpl obj =new ProductDaoImpl();
 		 PrintWriter out=response.getWriter();  
+		 response.setContentType("text/html");
 		try {
 		boolean	flag =obj.addproduct(products);
 			if(flag)

@@ -62,7 +62,7 @@ public class ConformOrder extends HttpServlet {
 			order.setOrderid(oid);
 			OrderDaoImpl obj3=new OrderDaoImpl();
 			obj3.makefinal(order);
-			response.sendRedirect("CustomerView.jsp");
+			response.sendRedirect("AdderPlacedSuccessfully.jsp");
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

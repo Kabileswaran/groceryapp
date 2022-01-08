@@ -28,6 +28,7 @@ public class ModifiyProductServlet extends HttpServlet {
 		producte.setProductId(Pid);
 		producte.setProductName(product);
 		ProductDaoImpl p=new ProductDaoImpl();
+		 resp.setContentType("text/html");
 	
 		 PrintWriter out=resp.getWriter();  
 	

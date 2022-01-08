@@ -9,23 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import com.grocery.daoimpl.CartDaoImpl;
 import com.grocery.model.Cart;
-import com.grocery.model.Customer;
 
 /**
- * Servlet implementation class Deleteproductincart
+ * Servlet implementation class IncreaseQuantity
  */
-@WebServlet("/Deleteproductincart")
-public class Deleteproductincart extends HttpServlet {
+@WebServlet("/IncreaseQuantity")
+public class IncreaseQuantity extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Deleteproductincart() {
+    public IncreaseQuantity() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,21 +34,28 @@ public class Deleteproductincart extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		int pid=0;
-		int oid=0;
-		 response.setContentType("text/html");
-		 oid= (int) session.getAttribute("logincustomerorderId");		
-		 pid = Integer.parseInt(request.getParameter("pId"));
-		 Cart stt =new Cart();
+		 int oid= (int) session.getAttribute("logincustomerorderId");	
+		 int pid=Integer.parseInt(request.getParameter("pId"));
+		 int qty=0;
+		 Cart stt=new Cart();
 		 stt.setOrderid(oid);
 		 stt.setProductid(pid);
-		 CartDaoImpl obj =new CartDaoImpl();
-		 try {
-			boolean flag = obj.delete(stt);
-			if(flag)
-			{
-				request.getRequestDispatcher("Cart.jsp").include(request, response);
-			}
+		 CartDaoImpl obj= new CartDaoImpl();
+	try {
+		 qty=	 obj.check(stt);
+	} catch (ClassNotFoundException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	} catch (SQLException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+	if (qty > 0&&!(qty>9)) {//check quantity
+
+
+		stt.setQuantity(qty + 1);
+		try {
+			obj.incease(stt);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,7 +63,15 @@ public class Deleteproductincart extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				
+		request.getRequestDispatcher("Cart.jsp").include(request, response);
+
+
+	} else 
+	{
+		request.getRequestDispatcher("Cart.jsp").include(request, response);	
+	}
+	
+		 
 	}
 
 	/**

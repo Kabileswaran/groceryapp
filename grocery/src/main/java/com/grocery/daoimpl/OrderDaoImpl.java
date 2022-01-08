@@ -138,9 +138,10 @@ public class OrderDaoImpl implements OrderDaoinferace {
 
 	}
 
-	public Order orderdetails() throws ClassNotFoundException, SQLException {
+	public List<Order> orderdetails() throws ClassNotFoundException, SQLException {
+		List<Order > todayOrder= new ArrayList<Order>();
 		Connection con = GetConnection.getConnections();
-		String query = "  SELECT order_id,status,order_date FROM order_details where order_date=trunc(sysdate )";
+		String query = "  SELECT order_id,status,order_date FROM order_details where order_date=trunc(sysdate )  and status in ('place order',  'conform')";
 		PreparedStatement stmt = con.prepareStatement(query);
 		Order order = new Order();
 		// stmt.executeUpdate();
@@ -151,8 +152,9 @@ public class OrderDaoImpl implements OrderDaoinferace {
 			order.setOrderdate(rs.getDate(3));
 			// System.out.println("\norderId :"+rs.getInt(1)+"\nstatus
 			// :"+rs.getString(2)+"\norderDate :"+rs.getDate(3));
+			todayOrder.add(order);
 		}
-		return order;
+		return todayOrder;
 	}
 
 	public List<Feature> userOrderDetails( Feature feature) throws ClassNotFoundException, SQLException {
@@ -195,7 +197,7 @@ public class OrderDaoImpl implements OrderDaoinferace {
 	public List<Order> orderdetail(Order order) throws ClassNotFoundException, SQLException {
 		Connection con = GetConnection.getConnections();
 		List<Order> orderList = new ArrayList<Order>();
-		String query = "  SELECT order_id,status,order_date FROM order_details where customer_id= ? and status= 'place order' or status='conform'";
+		String query = " SELECT order_id,status,order_date FROM order_details where  customer_id= ? and status in ('place order',  'conform')";
 		PreparedStatement stmt = con.prepareStatement(query);
 
 		stmt.setInt(1, order.getCustomerid());

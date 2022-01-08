@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>order</title>
 </head>
 <style>
 body {font-family: "Lato", sans-serif;}
@@ -48,8 +48,7 @@ body {font-family: "Lato", sans-serif;}
 
 
 <div class="sidebar">
-  <a href="TodayOrders.jsp"><i class="fa fa-fw fa-home"></i> TodayOrder</a>
-  <a href="Customize.jsp"><i class="fa fa-fw fa-wrench"></i> customize </a>
+  <a href="TodayOrders.jsp"><i class="fa fa-fw fa-home"></i> Today Order </a>
 </div>
 
 <div class="main">

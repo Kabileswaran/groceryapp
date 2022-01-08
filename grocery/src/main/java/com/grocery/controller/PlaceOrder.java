@@ -51,6 +51,7 @@ public class PlaceOrder extends HttpServlet {
 			List<Product> productList =obj.ViewAllProducte();
 			List<Integer> productid = new ArrayList<Integer> ();
 			List<Integer> productquantiy = new ArrayList<Integer>();
+			 response.setContentType("text/html");
 						
 			for(Product p:productList)
 			{

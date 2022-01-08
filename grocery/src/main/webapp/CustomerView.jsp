@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Home</title>
 </head>
 <style>
 body {font-family: "Lato", sans-serif;}
@@ -70,9 +70,9 @@ body {font-family: "Lato", sans-serif;}
 <div class="sidebar">
 <% Customer customer = (Customer) session.getAttribute("logincustomer");%>
 	
-  <a href="#AddProduct.jsp"><i class="fa fa-fw fa-home"></i><% out.print( customer.getFirstName()); %> </a>
-  <a href="LoginUserProfile.jsp"><i class="fa fa-fw fa-wrench"></i> UserProfile</a>
-  <a href="CustomerOrder.jsp"><i class="fa fa-fw fa-user"></i> ViewOrder</a>
+  <a href="#AddProduct.jsp"><i class="fa fa-fw fa-home"></i><% out.print("Welcome, " + customer.getFirstName() + "!"); %> </a>
+  <a href="LoginUserProfile.jsp"><i class="fa fa-fw fa-wrench"></i> User Profile</a>
+  <a href="CustomerOrder.jsp"><i class="fa fa-fw fa-user"></i> View Order</a>
    <a href="Cart.jsp"><i class="fa fa-fw fa-user"></i> Cart</a>
   <a href="Logout.jsp"><i class="fa fa-fw fa-envelope"></i> Logout</a>
 </div>
@@ -85,8 +85,8 @@ List<Product> productList =obj5.ViewAllProducte();
 <table>
 <thead>
 <tr>
-<th>ProductName</th>
-<th>UnitPrice</th>
+<th>Product Name</th>
+<th>Unit Price</th>
 <th>Add To Cart</th>
 </tr>
 </thead>
@@ -95,10 +95,9 @@ List<Product> productList =obj5.ViewAllProducte();
 <tr>
 <td><%=product.getProductName()%></td>
 <td><%=product.getProductPrice() %></td>
-<td input type='button' onclick="alert('Added To Cart')"><a href="AddToCart?orderId=<%=product.getProductId()%>">Add To Cart</a><td>
+<td input type='button' onclick="alert('Added To Cart')"><a href="AddToCart?orderId=<%=product.getProductId()%>">Add To Cart</a></td>
 
-<%-- <td><a href="AddToCart?orderId=<%=product.getProductId()%>">Add To Cart</a><td>
- --%>
+
  
  </tr>
 

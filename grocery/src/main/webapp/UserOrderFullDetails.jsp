@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Order Details</title>
 </head>
 <style>
 body {font-family: "Lato", sans-serif;}
@@ -64,6 +64,8 @@ body {font-family: "Lato", sans-serif;}
 
 
 <div class="sidebar">
+<a href="CustomerView.jsp"><i class="fa fa-fw fa-envelope"></i> Home</a>
+<a href="CustomerOrder.jsp"><i class="fa fa-fw fa-envelope"></i> Back</a>
   <a href="Logout.jsp"><i class="fa fa-fw fa-envelope"></i> Logout</a>
 </div>
 
@@ -100,7 +102,7 @@ double c=obj.userOrderDetailse(feature);
 <%} %>
 </tbody>
 </table>
-<h3><%out.print(c); %></h3>
+<h3><% out.print("Total ="+c); %></h3>
 </div>
   
 </div>

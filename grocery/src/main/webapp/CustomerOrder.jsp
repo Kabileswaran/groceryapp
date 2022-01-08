@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Order</title>
 </head>
 <style>
 body {font-family: "Lato", sans-serif;}
@@ -66,6 +66,7 @@ body {font-family: "Lato", sans-serif;}
 
 
 <div class="sidebar">
+<a href="CustomerView.jsp"><i class="fa fa-fw fa-envelope"></i> Home</a>
   <a href="Logout.jsp"><i class="fa fa-fw fa-envelope"></i> Logout</a>
 </div>
 
@@ -92,7 +93,7 @@ body {font-family: "Lato", sans-serif;}
 <td><%=orders.getOrderid()%></td>
 <td><%=orders.getStatus()%></td>
 <td><%=orders.getOrderdate()%></td>
-<td><a href="UserOrderFullDetails.jsp?orderId=<%=orders.getOrderid()%>">click</a><td>
+<td> <input type="button" value="Details" onclick="window.location='UserOrderFullDetails.jsp?orderId=<%=orders.getOrderid()%>'" ></td>
 
 
 </tr>

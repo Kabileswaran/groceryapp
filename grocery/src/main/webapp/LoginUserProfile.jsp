@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>My profile</title>
 </head>
 <style>
 body {font-family: "Lato", sans-serif;}
@@ -65,6 +65,7 @@ body {font-family: "Lato", sans-serif;}
 <% Customer customer = (Customer) session.getAttribute("logincustomer");%>
 	
   <a href="#AddProduct.jsp"><i class="fa fa-fw fa-home"></i><% out.print( customer.getFirstName()); %> </a>
+  <a href="CustomerView.jsp"><i class="fa fa-fw fa-envelope"></i> home</a>
   <a href="ChangePassword.jsp"><i class="fa fa-fw fa-user"></i> Change Password</a>
   <a href="Logout.jsp"><i class="fa fa-fw fa-envelope"></i> Logout</a>
 </div>
@@ -79,7 +80,7 @@ body {font-family: "Lato", sans-serif;}
 <th>First Name</th>
 <th>Last Name</th>
 <th>Address</th>
-<th>EmailId</th>
+<th>E-mail</th>
 <th>User Name</th>
 <th>Phone Number</th>
 </tr>

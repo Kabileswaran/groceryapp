@@ -2,6 +2,7 @@ package com.grocery.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -32,6 +33,7 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 	 customer.setPassword(Password);
 	 CustomerDaoImpl obj=new  CustomerDaoImpl();
 	 PrintWriter out=resp.getWriter();  
+	 resp.setContentType("text/html");
 	 try {
 		 
 		customer= obj.login(customer);
@@ -50,9 +52,10 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 			}
 		}
 		else {
-			 out.print("Sorry, username or password error!");  
-			
+			 out.print("Sorry, username or password incorrect!");  
+	
 			 req.getRequestDispatcher("Login.jsp").include(req, resp);
+			 
 			
 		}
 		

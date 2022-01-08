@@ -1,6 +1,6 @@
 <html>
 <body>
-<h2>Hello World!</h2>
-<a href="Login.jsp">hi</a>
+<h2>HELLO TO GROCERY SHOP!</h2>
+<a href="Login.jsp">PRESS TO CONTINUE </a>
 </body>
 </html>
