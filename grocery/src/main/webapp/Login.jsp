@@ -6,7 +6,24 @@
 <meta charset="ISO-8859-1">
 <title>Login</title>
 </head>
-<body>
+<style>
+body {
+  background-image: url('assets/home.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  
+}
+ #myHeader{ 
+ font-family: Verdana, Geneva, Tahoma, sans-serif;
+margin: 200px 550px;
+ position: relative;
+  font-size: large;
+  color: white;
+}
+</style>
+<body >
+<div id="myHeader">
   <h3>Grocery App</h3>
   
     <form action="login">
@@ -19,7 +36,6 @@
     </form>
     <label>New User? </label> 
     <input type="button" value="Sign Up" onclick="window.location='signup.jsp'" >
-    
-
+    </div>
 </body>
 </html>

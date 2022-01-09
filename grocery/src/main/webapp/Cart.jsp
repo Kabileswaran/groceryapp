@@ -98,6 +98,7 @@ double total= obj.showCartinTotal(feature);%>
 <table>
 <thead>
 <tr>
+<th>Product </th>
 <th>Product Name</th>
 <th>Price</th>
 <th>Quantity</th>
@@ -108,6 +109,7 @@ double total= obj.showCartinTotal(feature);%>
 <tbody>
 <%for(Feature list: cartlist){ %>
 <tr>
+<td><img alt="" src="assets/<%=list.getProductImage()%>"width="120" height="80"></td>
 <td><%=list.getProductName()%></td>
 <td><%=list.getPrice() %></td>
 <td><input type="button" value="-" onclick="window.location='DecreaseQuantity?pId=<%=list.getProductId()%>'" ><%=list.getQuantity()%>

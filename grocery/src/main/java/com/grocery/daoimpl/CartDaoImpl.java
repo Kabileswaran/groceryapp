@@ -76,7 +76,7 @@ public class CartDaoImpl implements CartInterface {
 	public List<Feature> showCartin(Feature feature) throws ClassNotFoundException, SQLException {
 		Connection con = GetConnection.getConnections();
 		List<Feature> incart = new ArrayList<Feature>();
-		String query = "select p.products_name,c.quantity,p.standard_cost,(c.quantity*p.standard_cost),p.products_id as cost from order_details o join cart c on o.order_id =c.order_id join product p on p.products_id=c.product_id where o.order_id=?";
+		String query = "select p.products_name,c.quantity,p.standard_cost,(c.quantity*p.standard_cost),p.products_id,Productsimage as cost from order_details o join cart c on o.order_id =c.order_id join product p on p.products_id=c.product_id where o.order_id=?";
 		PreparedStatement stmt = con.prepareStatement(query);
 		stmt.setInt(1, feature.getOrderId());
 		ResultSet rs = stmt.executeQuery();
@@ -87,6 +87,7 @@ public class CartDaoImpl implements CartInterface {
 			feature.setPrice(rs.getDouble(3));
 			feature.setCost(rs.getDouble(4));
 			feature.setProductId(rs.getInt(5));
+			feature.setProductImage(rs.getString(6));
 			incart.add(feature);
 
 		}

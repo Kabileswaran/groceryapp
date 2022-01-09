@@ -78,6 +78,7 @@ List<Product> productList =obj.AdminViewAllProducts();%>
 <table>
 <thead>
 <tr>
+<th>Product image</th>
 <th>Product ID</th>
 <th>Product Name</th>
 <th>Unit Price</th>
@@ -87,6 +88,7 @@ List<Product> productList =obj.AdminViewAllProducts();%>
 <tbody>
 <%for(Product product:productList){ %>
 <tr>
+<td><img alt="" src="assets/<%=product.getProductImage()%>"width="120" height="80"></td>
 <td><%=product.getProductId()%></td>
 <td><%=product.getProductName()%></td>
 <td><%=product.getProductPrice() %></td>

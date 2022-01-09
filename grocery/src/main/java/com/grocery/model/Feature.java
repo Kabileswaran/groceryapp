@@ -2,6 +2,7 @@ package com.grocery.model;
 
 public class Feature {
 private String	ProductName;
+private String	ProductImage;
 private double	price;
 private int	quantity;
 private double	Cost;
@@ -13,6 +14,12 @@ public int getProductId() {
 }
 public void setProductId(int productId) {
 	this.productId = productId;
+}
+public String getProductImage() {
+	return ProductImage;
+}
+public void setProductImage(String productImage) {
+	ProductImage = productImage;
 }
 public int getOrderId() {
 	return orderId;

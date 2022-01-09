@@ -5,7 +5,17 @@ public class Product {
 	private String ProductName;
 	private Double ProductPrice;
 	private String producStatus;
+	private String	ProductImage;
 	
+	
+
+	public String getProductImage() {
+		return ProductImage;
+	}
+
+	public void setProductImage(String productImage) {
+		ProductImage = productImage;
+	}
 
 	public String getProducStatus() {
 		return producStatus;

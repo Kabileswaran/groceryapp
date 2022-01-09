@@ -75,7 +75,7 @@ body {font-family: "Lato", sans-serif;}
 <label>Enter the product name</label>
 <input type="text" name="pname" required><br><br>
 <label>Price</label>
-<input type="text" name="price"  pattern="[1-9]{1,}"  required><br><br><br>
+<input type="text" name="price"  pattern="[1-9]{1}[0-9]"  required><br><br><br>
 <input type="submit" value="submit">
 </form>
 </div>

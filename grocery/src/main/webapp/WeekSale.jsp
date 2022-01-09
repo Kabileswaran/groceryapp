@@ -82,6 +82,7 @@ double b =obj.weekSales();%>
 <table>
 <thead>
 <tr>
+<th>Product</th>
 <th>ProductName</th>
 <th>UnitPrice</th>
 <th>Quantity</th>
@@ -91,6 +92,7 @@ double b =obj.weekSales();%>
 <tbody>
 <%for(Feature feature:sale){ %>
 <tr>
+<td><img alt="" src="assets/<%=feature.getProductImage()%>"width="120" height="80"></td>
 <td><%=feature.getProductName() %></td>
 <td><%=feature.getPrice()%></td>
 <td><%=feature.getQuantity() %></td>

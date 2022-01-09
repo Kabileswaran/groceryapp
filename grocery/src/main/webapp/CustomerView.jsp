@@ -85,6 +85,7 @@ List<Product> productList =obj5.ViewAllProducte();
 <table>
 <thead>
 <tr>
+<th>Product </th>
 <th>Product Name</th>
 <th>Unit Price</th>
 <th>Add To Cart</th>
@@ -93,6 +94,7 @@ List<Product> productList =obj5.ViewAllProducte();
 <tbody>
 <%for(Product product:productList){ %>
 <tr>
+<td><img alt="" src="assets/<%=product.getProducStatus()%>"width="120" height="80"></td>
 <td><%=product.getProductName()%></td>
 <td><%=product.getProductPrice() %></td>
 <td input type='button' onclick="alert('Added To Cart')"><a href="AddToCart?orderId=<%=product.getProductId()%>">Add To Cart</a></td>

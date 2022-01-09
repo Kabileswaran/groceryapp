@@ -1,4 +1,5 @@
 
+<%@page import="com.grocery.model.Order"%>
 <%@page import="com.grocery.model.Feature"%>
 <%@page import="com.grocery.daoimpl.OrderDaoImpl"%>
 <%@page import="java.util.List"%>
@@ -73,8 +74,11 @@ body {font-family: "Lato", sans-serif;}
 <% int b=Integer.parseInt(request.getParameter("orderId"));
 Feature feature= new Feature();
 feature.setOrderId(b);
+Order str =new Order();
+str.setOrderid(b);
 OrderDaoImpl obj =new OrderDaoImpl ();
 List<Feature> orderlist=obj.userOrderDetails(feature);
+String status = obj.status(str);
 double c=obj.userOrderDetailse(feature);
 %>
 
@@ -82,6 +86,7 @@ double c=obj.userOrderDetailse(feature);
 <table>
 <thead>
 <tr>
+<th>Product</th>
 <th>ProductName</th>
 <th>Price</th>
 <th>Quantity</th>
@@ -91,6 +96,7 @@ double c=obj.userOrderDetailse(feature);
 <tbody>
 <%for(Feature orders:orderlist){ %>
 <tr>
+<td><img alt="" src="assets/<%=orders.getProductImage()%>"width="120" height="80"></td>
 <td><%=orders.getProductName()%></td>
 <td><%=orders.getPrice()%></td>
 <td><%=orders.getQuantity()%></td>
@@ -103,6 +109,12 @@ double c=obj.userOrderDetailse(feature);
 </tbody>
 </table>
 <h3><% out.print("Total ="+c); %></h3>
+<% 
+if(status.equalsIgnoreCase("conform"))
+{%>
+
+ <input type="button" value="cancel order" onclick="window.location='CancelOrder?orderId=<%=b%>'" >
+<% }%>
 </div>
   
 </div>

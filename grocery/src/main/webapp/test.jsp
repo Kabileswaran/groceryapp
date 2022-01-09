@@ -15,22 +15,19 @@
 <%
 	// TODO Auto-generated method stub
 	
-	String total = "";
+	String total =null;
 	Connection con = GetConnection.getConnections();
-	String query1 = " SELECT products_image FROM images where customers_id =6 ";
+	String query1 = " SELECT products_image FROM images where customers_id =8  ";
 	Statement stmt1 = con.createStatement();
 	ResultSet rs1 = stmt1.executeQuery(query1);
-	if (rs1.next()) {
-		System.out.println(" total " + rs1.getString(1));
+	while (rs1.next()) {
+		System.out.println(" total "+rs1.getString(1));
 		total = rs1.getString(1);
 	}
 
 
-System.out.println(total);
-
-
  %>
- <img alt="" src="<%=total%>"width="120" height="60">
+ 
 
 </body>
 </html>

@@ -82,11 +82,11 @@ public class ProductDaoImpl implements Productinterface  {
 			Connection con = GetConnection.getConnections();
 			Statement stmt = con.createStatement();
 			List<Product> productList1 = new ArrayList<Product>();
-			String view = " SELECT products_name,standard_cost,products_id FROM product where status ='y' or status ='Y'";
+			String view = " SELECT products_name,standard_cost,products_id,Productsimage FROM product where status ='y' or status ='Y'";
 			ResultSet rs = stmt.executeQuery(view);
 			while (rs.next()) {
 				// System.out.println(rs.getInt(2) + " " + rs.getString(1)+" "+ rs.getInt(3));
-				Product product = new Product( rs.getInt(3),rs.getString(1),rs.getDouble(2));
+				Product product = new Product( rs.getInt(3),rs.getString(1),rs.getDouble(2),rs.getString(4));
 				productList1.add(product);
 			}
 			return productList1;
@@ -96,11 +96,16 @@ public class ProductDaoImpl implements Productinterface  {
 		Connection con = GetConnection.getConnections();
 		Statement stmt = con.createStatement();
 		List<Product> productList = new ArrayList<Product>();
-		String view = " SELECT products_name,products_id,standard_cost, status FROM product";
+		String view = " SELECT products_name,products_id,standard_cost, status,Productsimage FROM product";
 		ResultSet rs = stmt.executeQuery(view);
 		while (rs.next()) {
 			// System.out.println(rs.getInt(2) + " " + rs.getString(1)+" "+ rs.getInt(3));
-			Product product = new Product(rs.getInt(2), rs.getString(1), rs.getDouble(3),rs.getString(4));
+			Product product = new Product();
+			product.setProductImage(rs.getString(5));
+			product.setProductName(rs.getString(1));
+			product.setProductId(rs.getInt(2));
+			product.setProductPrice( rs.getDouble(3));
+			product.setProducStatus(rs.getString(4));
 			productList.add(product);
 		}
 		return productList;

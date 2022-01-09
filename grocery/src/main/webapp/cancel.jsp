@@ -1,20 +1,18 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>WELCOME</title>
+<title>Cancel</title>
 </head>
 <body>
 <script>
          setTimeout(function(){
-            window.location.href = 'Login.jsp';
-         }, 2000);
+            window.location.href = 'CustomerView.jsp';
+         }, 3000);
       </script>
-      
-      <h2>HELLO TO GROCERY SHOP!</h2>
+      <h1>Cancel Order</h1>
 
 </body>
 </html>
