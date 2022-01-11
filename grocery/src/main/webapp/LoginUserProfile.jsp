@@ -63,7 +63,7 @@ body {font-family: "Lato", sans-serif;}
 
 <div class="sidebar">
 <% Customer customer = (Customer) session.getAttribute("logincustomer");%>
-  <a href="CustomerView.jsp"><i class="fa fa-fw fa-envelope"></i> home</a>
+  <a href="CustomerView.jsp"><i class="fa fa-fw fa-envelope"></i> Home</a>
   <a href="ChangePassword.jsp"><i class="fa fa-fw fa-user"></i> Change Password</a>
   <a href="Logout.jsp"><i class="fa fa-fw fa-envelope"></i> Logout</a>
 </div>

@@ -46,7 +46,6 @@ address VARCHAR2(250) NOT NULL,
   SELECT * FROM cart ;
   
  SELECT * FROM product;
- update product set Productsimage='paste-100g.png'  where products_id =45;
 select*from customer;
  SELECT * FROM order_details;
   SELECT order_id,status,order_date FROM order_details where customer_id=2;
@@ -73,6 +72,7 @@ select*from customer;
  join product p on p.products_id=c.product_id
  group by(p.products_name,c.price,trunc(d.order_date),d.status,p.Productsimage)
  having trunc(d.order_date)=trunc(sysdate) and  d.status='conform';
+
  --------------------------------------------- total one day
  create view today_product_amount_sale as
    select  
@@ -158,3 +158,4 @@ create view week_product_amount_sale as
  -----------getting produvt id in list------------
  SELECT product_id FROM cart where order_id=46;
  ----------------------------------------
+  --place order

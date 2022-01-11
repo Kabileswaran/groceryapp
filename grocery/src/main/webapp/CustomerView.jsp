@@ -12,6 +12,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <title>Home</title>
 </head>
 <style>
@@ -54,14 +57,15 @@ body {font-family: "Lato", sans-serif;}
              #allusers{
        position: absolute;
        top:100px;
-       left:200px;
+       left:400px;
        right: 200px;
        bottom: 100px;
        }
         
 @media screen and (max-height: 450px) {
   .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
+  .sidebar a {font-size: 18px;
+   font-family: Verdana, Geneva, Tahoma, sans-serif;}
 }
 </style>
 <body>
@@ -94,7 +98,7 @@ List<Product> productList =obj5.ViewAllProducte();
 <tbody>
 <%for(Product product:productList){ %>
 <tr>
-<td><img alt="" src="assets/<%=product.getProducStatus()%>"width="120" height="80"></td>
+<td><img alt="" src="assets/<%=product.getProducStatus()%>"width="120" height="80" class="img-thumbnail"></td>
 <td><%=product.getProductName()%></td>
 <td><%=product.getProductPrice() %></td>
 <td input type='button' onclick="alert('Added To Cart')"><a href="AddToCart?orderId=<%=product.getProductId()%>">Add To Cart</a></td>

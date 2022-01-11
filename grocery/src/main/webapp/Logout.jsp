@@ -8,6 +8,11 @@
 </head>
 <body>
 <h1>Logout successfully</h1>
-<a href="Login.jsp">Login</a>
+<%session.invalidate(); %>
+<script>
+         setTimeout(function(){
+            window.location.href = 'Login.jsp';
+         }, 2000);
+      </script>
 </body>
 </html>

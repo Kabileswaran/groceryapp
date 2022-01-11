@@ -68,8 +68,8 @@ body {font-family: "Lato", sans-serif;}
 
 
 <div class="sidebar">
-<a href="CustomerView.jsp"><i class="fa fa-fw fa-home"></i> HOME</a>
-   <a href="Logout.jsp"><i class="fa fa-fw fa-wrench"></i> LOGOUT</a>
+<a href="CustomerView.jsp"><i class="fa fa-fw fa-home"></i> Home</a>
+   <a href="Logout.jsp"><i class="fa fa-fw fa-wrench"></i> Logout</a>
 </div>
 
 <div class="main"></div>
@@ -121,7 +121,7 @@ double total= obj.showCartinTotal(feature);%>
 </tbody>
 </table><br>
 Total Price = <% out.print( total) ;%>/-
-<h4><a href="ConformOrder">Place the order</a></h4>
+<h4><input type="button" value="Place the order" onclick="window.location='ConformOrder'" ></h4>
 </div>
 </body>
 </html>

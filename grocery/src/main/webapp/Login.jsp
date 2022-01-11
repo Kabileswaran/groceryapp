@@ -4,38 +4,54 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <title>Login</title>
 </head>
 <style>
 body {
-  background-image: url('assets/home.jpg');
+  background-image: url('assets/home.jpg') ;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
   
 }
- #myHeader{ 
+
+ .img-fluid{ 
  font-family: Verdana, Geneva, Tahoma, sans-serif;
 margin: 200px 550px;
- position: relative;
+ position: fixed;
   font-size: large;
   color: white;
 }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
 </style>
-<body >
-<div id="myHeader">
+<body class="img-fluid">
+
   <h3>Grocery App</h3>
   
     <form action="login">
         <label for="pnumber">Mobile Number</label><br>
-        <input type="text" name="uname" required autofocus pattern="[6-9]{1}[0-9]{9}">   <br><br>
+        <input type="text" name="uname" required autofocus pattern="[6-9]{1}[0-9]{9}" placeholder="Enter Mobile number">   <br><br>
         <label for="pword">Password</label><br>
-        <input type="password" name="pword" required min="8"> <br> <br>
+        <input type="password" name="pword" required min="8"placeholder="Enter password"> <br> <br>
           
-        <input type="submit" value="Login"><br><br>
+        <input type="submit"class="btn btn-success" value="Login"><br><br>
     </form>
     <label>New User? </label> 
-    <input type="button" value="Sign Up" onclick="window.location='signup.jsp'" >
-    </div>
+    <input type="button" class="btn btn-primary" value="Sign Up" onclick="window.location='signup.jsp'" >
 </body>
 </html>
