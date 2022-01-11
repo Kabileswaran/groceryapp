@@ -48,7 +48,6 @@ address VARCHAR2(250) NOT NULL,
  SELECT * FROM product;
 select*from customer;
  SELECT * FROM order_details;
-  SELECT order_id,status,order_date FROM order_details where customer_id=2;
  SELECT * FROM customer;
  SELECT TO_CHAR(SYSDATE, 'DD-MM-YYYY') FROM DUAL;
  update order_details set status ='conform', order_date=TO_CHAR(SYSDATE, 'DD-MM-YYYY') where order_id=46;
