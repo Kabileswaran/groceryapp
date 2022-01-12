@@ -31,6 +31,9 @@ body {font-family: "Lato", sans-serif;}
   overflow-x: hidden;
   padding-top: 16px;
 }
+a
+{
+text-decoration: none}
 
 .sidebar a {
   padding: 20px 2px 8px 16px;
@@ -98,10 +101,10 @@ List<Product> productList =obj5.ViewAllProducte();
 <tbody>
 <%for(Product product:productList){ %>
 <tr>
-<td><img alt="" src="assets/<%=product.getProducStatus()%>"width="120" height="80" class="img-thumbnail"></td>
+<td><img alt="" src="assets/<%=product.getProducStatus()%>"width="120" height="80"></td>
 <td><%=product.getProductName()%></td>
 <td><%=product.getProductPrice() %></td>
-<td input type='button' onclick="alert('Added To Cart')"><a href="AddToCart?orderId=<%=product.getProductId()%>">Add To Cart</a></td>
+<td input type='button' onclick="alert('Added To Cart')" ><a href="AddToCart?orderId=<%=product.getProductId()%>">Add To Cart</a></td>
 
 
  

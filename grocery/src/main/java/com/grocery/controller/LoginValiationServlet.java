@@ -1,10 +1,7 @@
 package com.grocery.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URLEncoder;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.grocery.daoimpl.CustomerDaoImpl;
+import com.grocery.exception.LoginException;
 import com.grocery.model.Customer;
 @WebServlet("/login")
 public class LoginValiationServlet extends HttpServlet {
@@ -32,7 +30,7 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 	 customer.setPhonenumber(phoneNumber);
 	 customer.setPassword(Password);
 	 CustomerDaoImpl obj=new  CustomerDaoImpl();
-	 PrintWriter out=resp.getWriter();  
+	 HttpSession session=req.getSession();  
 	 resp.setContentType("text/html");
 	 try {
 		 
@@ -40,7 +38,7 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 	
 		if(customer.getCustomerid()!=0)
 		{
-			 HttpSession session=req.getSession();  
+			
 		        session.setAttribute("logincustomer", customer);  
 			if(customer.getCustomerid()==1)
 			{
@@ -52,14 +50,16 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 			}
 		}
 		else {
-			 out.print("Sorry, username or password incorrect!");  
 	
-			 req.getRequestDispatcher("Login.jsp").include(req, resp);
+			 throw new LoginException();
 			 
 			
 		}
 		
-	} catch (ClassNotFoundException | SQLException e) {
+	} catch (ClassNotFoundException | SQLException | LoginException e) {
+		session.setAttribute("erroruserid", ((LoginException) e).getUserNameLoginMessage());
+	
+		req.getRequestDispatcher("Login.jsp").include(req, resp);
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
