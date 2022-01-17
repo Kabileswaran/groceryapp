@@ -43,8 +43,9 @@ address VARCHAR2(250) NOT NULL,
  status varchar2(1) DEFAULT 'y');
 
  --------------------------------------------------------------------------------------------------------------------------------
-  SELECT * FROM cart ;
+  SELECT * FROM cart where order_id=101;
   
+  SELECT quantity FROM cart where order_id=101;
  SELECT * FROM product;
 select*from customer;
  SELECT * FROM order_details;
@@ -55,7 +56,6 @@ select*from customer;
  
   SELECT order_id,status,order_date,customer_id from cu
   SELECT customer_id FROM order_details where  status in 'place order'  'conform';
- 
  SELECT TO_CHAR(SYSDATE, 'DD-MM-YYYY') FROM DUAL;
 
  ----------------one day sale
@@ -158,3 +158,7 @@ create view week_product_amount_sale as
  SELECT product_id FROM cart where order_id=46;
  ----------------------------------------
   --place order
+  ------------------------------------sort
+   SELECT products_name,standard_cost FROM product where status ='y' or status ='Y' and  products_name LIKE '%chili 1kg%';
+   SELECT  products_name,standard_cost,products_id,Productsimage FROM product where status in('y' ,'Y') and  products_name LIKE 'chili 1kg';
+   

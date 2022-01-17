@@ -4,15 +4,15 @@ public class Cart {
 	private int orderid;
 	private int productid;
 	private int quantity;
-	private int price;
+	private double price;
 	
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setPrice(double d) {
+		this.price = d;
 	}
 
 	public int getOrderid() {

@@ -24,7 +24,7 @@ public class CartDaoImpl implements CartInterface {
 		stmt.setInt(1, stt.getOrderid());
 		stmt.setInt(2, stt.getProductid());
 		stmt.setInt(3, stt.getQuantity());
-		stmt.setInt(4, stt.getPrice());
+		stmt.setDouble(4, stt.getPrice());
 		stmt.executeUpdate();
 		System.out.println("order place success");
 
@@ -141,4 +141,17 @@ public class CartDaoImpl implements CartInterface {
 		stmt.executeUpdate();
 		System.out.println("order value compleled ");
 	}
+	public List<Integer>  gettingproductpriceincart (Cart stt) throws ClassNotFoundException, SQLException {
+		Connection con = GetConnection.getConnections();
+		List<Integer> ProductId = new ArrayList<Integer>();
+		String query = " SELECT quantity FROM cart where order_id=?";
+		PreparedStatement stmt = con.prepareStatement(query);
+		stmt.setInt(1, stt.getOrderid());
+		ResultSet rs = stmt.executeQuery();
+		while (rs.next()) {
+			ProductId.add(rs.getInt(1));
+		}
+		return ProductId;
+	}
+	
 	}

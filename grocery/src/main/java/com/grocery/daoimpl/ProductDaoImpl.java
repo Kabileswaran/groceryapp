@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.grocery.dao.Productinterface;
+import com.grocery.model.Feature;
 import com.grocery.model.Product;
 import com.grocery.util.GetConnection;
 
@@ -129,5 +130,26 @@ public class ProductDaoImpl implements Productinterface  {
 	         
 			return b1;
 	}	
+	public List<Product> sortproduct(Product product) throws ClassNotFoundException, SQLException {
+		Connection con = GetConnection.getConnections();
+		List<Product> sortproductlist = new ArrayList<Product>();
+		String query = " SELECT  products_name,standard_cost,products_id,Productsimage FROM product where status in('y' ,'Y') and  products_name LIKE ?";
+		PreparedStatement stmt = con.prepareStatement(query);
+		stmt.setString(1, "%" + product.getProductName()+ "%" );
+		ResultSet rs = stmt.executeQuery();
+		while (rs.next()) {
+			 product = new Product();
+			product.setProductName(rs.getString(1));
+			product.setProductPrice(rs.getDouble(2));
+			product.setProductId(rs.getInt(3));
+			product.setProductImage(rs.getString(4));
+			 sortproductlist.add(product);
+			
+			
+
+		}
+		return sortproductlist;
+	
 }
 
+}

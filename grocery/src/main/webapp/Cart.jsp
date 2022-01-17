@@ -88,6 +88,7 @@ Customer customer = (Customer) session.getAttribute("logincustomer");
 		oid=ojid;
 	}  
 	session.setAttribute("logincustomerorderId", oid); 
+	double offer=0;
 %>
 <% Feature feature = new Feature();
 feature.setOrderId(oid);
@@ -120,7 +121,19 @@ double total= obj.showCartinTotal(feature);%>
 <%} %>
 </tbody>
 </table><br>
-Total Price = <% out.print( total) ;%>/-
+Total  Price = <% out.print( total) ;%>/-<br>
+<%if(total>499&& total<999)
+	{
+	offer=total*0.05;
+	total= total-offer;
+	 out.print("offer price="+ total+"/-") ;
+	}
+	else if(total>=999)
+	{
+		offer=total*0.1;
+		total= total-offer;
+		out.print("offer price="+ total+"/-") ;
+	}%>
 <h4><input type="button" value="Place the order" onclick="window.location='ConformOrder'" ></h4>
 </div>
 </body>

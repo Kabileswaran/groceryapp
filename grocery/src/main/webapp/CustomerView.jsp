@@ -104,12 +104,12 @@ List<Product> productList =obj5.ViewAllProducte();
 <td><img alt="" src="assets/<%=product.getProducStatus()%>"width="120" height="80"></td>
 <td><%=product.getProductName()%></td>
 <td><%=product.getProductPrice() %></td>
-<td input type='button' onclick="alert('Added To Cart')" ><a href="AddToCart?orderId=<%=product.getProductId()%>">Add To Cart</a></td>
-
+<td><input type="button" value="Add to cart"
+		onclick="alert('Added To Cart'); window.location='AddToCart?orderId=<%=product.getProductId()%>';">
+</td>
 
  
  </tr>
-
 <%} %>
 </tbody>
 </table>

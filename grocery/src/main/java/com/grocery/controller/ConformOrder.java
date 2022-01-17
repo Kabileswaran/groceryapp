@@ -24,46 +24,96 @@ import com.grocery.model.Product;
 @WebServlet("/ConformOrder")
 public class ConformOrder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ConformOrder() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ConformOrder() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		 int oid= (int) session.getAttribute("logincustomerorderId");	
-		 Cart stt=new Cart();
-		 stt.setOrderid(oid);
-		 CartDaoImpl obj=new CartDaoImpl();
-		 try {
-			List<Integer> prdid= obj.gettingproductidincart(stt);
-			for(int i=0;i<prdid.size();i++)
-			{
-				Product product=new Product();
-				product.setProductId(prdid.get(i));
-				ProductDaoImpl obj1= new ProductDaoImpl();
-				int value= obj1.gettingRate(product);
-				stt.setOrderid(oid);
-				stt.setPrice(value);
-				stt.setProductid(prdid.get(i));
-				obj.insertcurrentvalue(stt);
-				
-				
+		double value = 0;
+		double offercost = 0;
+
+		int oid = (int) session.getAttribute("logincustomerorderId");
+		Cart stt = new Cart();
+		stt.setOrderid(oid);
+		CartDaoImpl obj = new CartDaoImpl();
+		try {
+			List<Integer> prdids = obj.gettingproductidincart(stt);
+			List<Integer> prdidse = obj.gettingproductpriceincart(stt);
+			
+			for (int i = 0; i < prdids.size(); i++) {
+				Product product = new Product();
+				product.setProductId(prdids.get(i));
+				ProductDaoImpl obj1 = new ProductDaoImpl();
+				value = obj1.gettingRate(product);
+				offercost=prdidse.get(i)*value;
+				offercost += offercost;
+
 			}
-			Order order =new Order();
+
+			System.out.println(offercost);
+			if (offercost > 499 && (offercost < 999)) {
+				System.out.println(offercost);
+				List<Integer> prdid = obj.gettingproductidincart(stt);
+				for (int i = 0; i < prdid.size(); i++) {
+					Product product = new Product();
+					product.setProductId(prdid.get(i));
+					ProductDaoImpl obj1 = new ProductDaoImpl();
+					value = obj1.gettingRate(product);
+					value = value - (value * 0.05);
+					stt.setOrderid(oid);
+					stt.setPrice(value);
+					stt.setProductid(prdid.get(i));
+					obj.insertcurrentvalue(stt);
+
+				}
+			}  else if (offercost > 999) {
+				System.out.println(offercost);
+				List<Integer> prdid = obj.gettingproductidincart(stt);
+				for (int i = 0; i < prdid.size(); i++) {
+					Product product = new Product();
+					product.setProductId(prdid.get(i));
+					ProductDaoImpl obj1 = new ProductDaoImpl();
+					value = obj1.gettingRate(product);
+					value = value - (value * 0.1);
+					stt.setOrderid(oid);
+					stt.setPrice(value);
+					stt.setProductid(prdid.get(i));
+					obj.insertcurrentvalue(stt);
+
+				}
+			} else {
+				System.out.println(offercost+"hi232");
+				List<Integer> prdid = obj.gettingproductidincart(stt);
+				for (int i = 0; i < prdid.size(); i++) {
+					Product product = new Product();
+					product.setProductId(prdid.get(i));
+					ProductDaoImpl obj1 = new ProductDaoImpl();
+					value = obj1.gettingRate(product);
+					stt.setOrderid(oid);
+					stt.setPrice(value);
+					stt.setProductid(prdid.get(i));
+					obj.insertcurrentvalue(stt);
+
+				}
+			}
+			Order order = new Order();
 			order.setOrderid(oid);
-			OrderDaoImpl obj3=new OrderDaoImpl();
+			OrderDaoImpl obj3 = new OrderDaoImpl();
 			obj3.makefinal(order);
 			response.sendRedirect("AdderPlacedSuccessfully.jsp");
-			
+
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -74,9 +124,11 @@ public class ConformOrder extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
