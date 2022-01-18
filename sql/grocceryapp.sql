@@ -43,8 +43,7 @@ address VARCHAR2(250) NOT NULL,
  status varchar2(1) DEFAULT 'y');
 
  --------------------------------------------------------------------------------------------------------------------------------
-  SELECT * FROM cart where order_id=101;
-  
+  SELECT * FROM cart ;
   SELECT quantity FROM cart where order_id=101;
  SELECT * FROM product;
 select*from customer;
@@ -70,7 +69,7 @@ select*from customer;
  join cart c on d.order_id=c.order_id
  join product p on p.products_id=c.product_id
  group by(p.products_name,c.price,trunc(d.order_date),d.status,p.Productsimage)
- having trunc(d.order_date)=trunc(sysdate) and  d.status='conform';
+ having trunc(d.order_date)=trunc(sysdate) and  d.status='confirm';
 
  --------------------------------------------- total one day
  create view today_product_amount_sale as
@@ -80,7 +79,7 @@ select*from customer;
  join cart c on d.order_id=c.order_id
  join product p on p.products_id=c.product_id
  group by(p.products_name,c.price,trunc(d.order_date),d.status)
- having trunc(d.order_date)=trunc(sysdate) and d.status='conform';
+ having trunc(d.order_date)=trunc(sysdate) and d.status='confirm';
  ------------------------------------------- last 7 days 
  create view week_product_sale as
  select  
@@ -94,7 +93,7 @@ select*from customer;
  join product p on p.products_id=c.product_id
  where trunc(d.order_date) between trunc(sysdate-7) and trunc(sysdate )
  group by(p.products_name,c.price,d.status,p.productsimage)
- having  d.status='conform' ;
+ having  d.status='confirm' ;
 
 ----------------------------------------------------------last 7 days amount
 create view week_product_amount_sale as
@@ -104,7 +103,7 @@ create view week_product_amount_sale as
  join cart c on d.order_id=c.order_id
  join product p on p.products_id=c.product_id
  group by(p.products_name,c.price,trunc(d.order_date),d.status)
- having trunc(d.order_date) between trunc(sysdate-7) and trunc(sysdate ) and d.status='conform'  ;
+ having trunc(d.order_date) between trunc(sysdate-7) and trunc(sysdate ) and d.status='confirm'  ;
  -------------------------------
  SELECT * FROM   week_product_amount_sale;
  select* from  week_product_sale;

@@ -53,19 +53,20 @@
 }
 </style>
 <body>
+<% Customer customer = (Customer) session.getAttribute("logincustomer");%>
     <div class="row">
         <div class="col-sm-12 p-3   text-white"> 
           <img src="assets/logo.jpg" alt="" class="float-start">
             <nav class="navbar navbar-expand-lg navbar-light bg-light p-2 ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Home</a>
+    <a class="navbar-brand" href="CustomerView.jsp">Home</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="LoginUserProfile.jsp">df</a>
+          <a class="nav-link active" aria-current="page" href="LoginUserProfile.jsp"><% out.print("Welcome, " + customer.getFirstName() + "!"); %></a>
         </li>
         
         <li class="nav-item">
@@ -103,8 +104,8 @@
        <span> <%=products.getProductName()%></span> <br> <br>
        <span> <label>Rs</label></span>
        <span> <%=products.getProductPrice() %> </span><br> <br>
-        <input type="button" class="btn btn-primary" value="Add to cart"
-		onclick="window.location='AddToCart?orderId=<%=products.getProductId()%>'">
+      <input type="button" value="Add to cart" class="btn btn-primary"
+		onclick="alert('Added To Cart'); window.location='AddToCart?orderId=<%=products.getProductId()%>';">
 
         </div>
         

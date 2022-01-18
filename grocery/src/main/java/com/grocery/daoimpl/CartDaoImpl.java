@@ -143,15 +143,15 @@ public class CartDaoImpl implements CartInterface {
 	}
 	public List<Integer>  gettingproductpriceincart (Cart stt) throws ClassNotFoundException, SQLException {
 		Connection con = GetConnection.getConnections();
-		List<Integer> ProductId = new ArrayList<Integer>();
+		List<Integer> ProductIds = new ArrayList<Integer>();
 		String query = " SELECT quantity FROM cart where order_id=?";
 		PreparedStatement stmt = con.prepareStatement(query);
 		stmt.setInt(1, stt.getOrderid());
 		ResultSet rs = stmt.executeQuery();
 		while (rs.next()) {
-			ProductId.add(rs.getInt(1));
+			ProductIds.add(rs.getInt(1));
 		}
-		return ProductId;
+		return ProductIds;
 	}
 	
 	}

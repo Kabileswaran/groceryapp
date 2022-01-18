@@ -143,7 +143,7 @@ public class OrderDaoImpl implements OrderDaoinferace {
 	public List<Order> orderdetails() throws ClassNotFoundException, SQLException {
 		List<Order> todayOrder = new ArrayList<Order>();
 		Connection con = GetConnection.getConnections();
-		String query = "  SELECT order_id,status,order_date FROM order_details where order_date=trunc(sysdate )  and status in ('place order',  'conform','cancel')";
+		String query = "  SELECT order_id,status,order_date FROM order_details where order_date=trunc(sysdate )  and status in ('place order',  'confirm','cancel')";
 		PreparedStatement stmt = con.prepareStatement(query);
 		Order order = new Order();
 		// stmt.executeUpdate();
@@ -202,7 +202,7 @@ public class OrderDaoImpl implements OrderDaoinferace {
 	public List<Order> orderdetail(Order order) throws ClassNotFoundException, SQLException {
 		Connection con = GetConnection.getConnections();
 		List<Order> orderList = new ArrayList<Order>();
-		String query = " SELECT order_id,status,order_date FROM order_details where  customer_id= ? and status in ('place order',  'conform','cancel')";
+		String query = " SELECT order_id,status,order_date FROM order_details where  customer_id= ? and status in ('place order',  'confirm','cancel')";
 		PreparedStatement stmt = con.prepareStatement(query);
 
 		stmt.setInt(1, order.getCustomerid());
@@ -252,7 +252,7 @@ public class OrderDaoImpl implements OrderDaoinferace {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String query = " update order_details set status ='conform' , order_date=TO_CHAR(SYSDATE, 'DD-MM-YYYY') where order_id=?";
+		String query = " update order_details set status ='confirm' , order_date=TO_CHAR(SYSDATE, 'DD-MM-YYYY') where order_id=?";
 
 		try {
 			PreparedStatement stmt = con.prepareStatement(query);

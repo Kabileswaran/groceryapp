@@ -43,6 +43,7 @@ public class ConformOrder extends HttpServlet {
 		HttpSession session = request.getSession();
 		double value = 0;
 		double offercost = 0;
+		double offercoste = 0;
 
 		int oid = (int) session.getAttribute("logincustomerorderId");
 		Cart stt = new Cart();
@@ -51,14 +52,14 @@ public class ConformOrder extends HttpServlet {
 		try {
 			List<Integer> prdids = obj.gettingproductidincart(stt);
 			List<Integer> prdidse = obj.gettingproductpriceincart(stt);
-			
+
 			for (int i = 0; i < prdids.size(); i++) {
 				Product product = new Product();
 				product.setProductId(prdids.get(i));
 				ProductDaoImpl obj1 = new ProductDaoImpl();
 				value = obj1.gettingRate(product);
-				offercost=prdidse.get(i)*value;
-				offercost += offercost;
+				offercoste = prdidse.get(i) * value;
+				offercost += offercoste;
 
 			}
 
@@ -78,8 +79,7 @@ public class ConformOrder extends HttpServlet {
 					obj.insertcurrentvalue(stt);
 
 				}
-			}  else if (offercost > 999) {
-				System.out.println(offercost);
+			} else if (offercost >= 999) {
 				List<Integer> prdid = obj.gettingproductidincart(stt);
 				for (int i = 0; i < prdid.size(); i++) {
 					Product product = new Product();
@@ -94,7 +94,6 @@ public class ConformOrder extends HttpServlet {
 
 				}
 			} else {
-				System.out.println(offercost+"hi232");
 				List<Integer> prdid = obj.gettingproductidincart(stt);
 				for (int i = 0; i < prdid.size(); i++) {
 					Product product = new Product();
