@@ -21,10 +21,11 @@ public class ProductDaoImpl implements Productinterface  {
 	int	b1 = 0;
 	public boolean addproduct(Product products) throws ClassNotFoundException, SQLException {
 			Connection con = GetConnection.getConnections();
-			String query = " insert into product (products_name,standard_cost)values(?,?)";
+			String query = " insert into product (products_name,standard_cost,productsimage)values(?,?,?)";
 			PreparedStatement stmt = con.prepareStatement(query);
 			stmt.setString(1, products.getProductName());
 			stmt.setDouble(2, products.getProductPrice());
+			stmt.setString(3, products.getProductImage());
 			stmt.executeUpdate();
 			return true;
 			

@@ -320,6 +320,21 @@ public class OrderDaoImpl implements OrderDaoinferace {
 		}
 		return true;
 	}
+	public List<Order> graphsale() throws ClassNotFoundException, SQLException {
+		Connection con = GetConnection.getConnections();
+		List<Order> todaysale = new ArrayList<Order>();
+		String query = "SELECT count(status),trunc(order_date) FROM order_details where  trunc(order_date) between trunc(sysdate-7) and trunc(sysdate ) and status ='confirm' group by trunc(order_date)";
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(query);
+		while (rs.next()) {
+			Order orders = new Order();
+			orders.setOrderdate(rs.getDate(2));
+			orders.setOrderid(rs.getInt(1));
+			todaysale.add(orders);
+
+		}
+		return todaysale;
+	}
 	
 	
 	

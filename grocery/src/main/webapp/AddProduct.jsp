@@ -72,15 +72,17 @@ body {font-family: "Lato", sans-serif;}
   
 <div id="allusers">
 <form action="Addproduct">
-<label>Enter the product name</label> <br> 
-<input type="text" name="pname" required> <br><br>
-<label>Enter the Price</label><br>
-<input type="text" name="price" pattern="[1-9]{1}[0-9]"  required> <br><br><br>
+
+<label>Enter the product name</label>  
+<input type="text" name="pname" required><br> <br>
+<label>Enter the Price</label>
+<input type="text" name="price" pattern="[1-9]{1}[0-9]+"  required> <br> <br>
+<label>product Image</label> 
+ <input type="file" required name="productimage"> <br>
 <input type="submit" value="submit">
 </form>
 </div>
   
-</div>
 </body>
 </html>
 

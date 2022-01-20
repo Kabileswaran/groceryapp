@@ -9,9 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.jasper.tagplugins.jstl.core.Out;
-
 import com.grocery.daoimpl.ProductDaoImpl;
 import com.grocery.model.Product;
 
@@ -35,9 +32,12 @@ public class AddProductServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String productimage= request.getParameter("productimage");
+		System.out.println(productimage);
 		String product= request.getParameter("pname");
 		double price= Double.parseDouble(request.getParameter("price"));
 		Product products = new Product();
+		products.setProductImage(productimage);
 		products.setProductName(product);
 		products.setProductPrice(price);
 		ProductDaoImpl obj =new ProductDaoImpl();

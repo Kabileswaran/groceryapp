@@ -46,13 +46,16 @@ address VARCHAR2(250) NOT NULL,
   SELECT * FROM cart ;
   SELECT quantity FROM cart where order_id=101;
  SELECT * FROM product;
+ DELETE FROM product WHERE products_id = 64;
+ UPDATE product
+   SET productsimage = 'lemon-1kg.jpg' where products_id=61;
 select*from customer;
  SELECT * FROM order_details;
  SELECT * FROM customer;
  SELECT TO_CHAR(SYSDATE, 'DD-MM-YYYY') FROM DUAL;
  update order_details set status ='conform', order_date=TO_CHAR(SYSDATE, 'DD-MM-YYYY') where order_id=46;
  
- 
+ 6
   SELECT order_id,status,order_date,customer_id from cu
   SELECT customer_id FROM order_details where  status in 'place order'  'conform';
  SELECT TO_CHAR(SYSDATE, 'DD-MM-YYYY') FROM DUAL;
